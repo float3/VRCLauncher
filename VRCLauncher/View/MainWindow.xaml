@@ -4,7 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="VRCLauncher" Height="450" Width="800">
+        Title="VRCLauncher" Height="450" Width="800" Background="Gray" Foreground="Black">
+	<Window.Resources>
+		<Style TargetType="{x:Type TextBox}">
+			<Setter Property="Background" Value="White" />
+			<Setter Property="Foreground" Value="Black" />
+		</Style>
+		<Style TargetType="{x:Type Button}">
+			<Setter Property="Background" Value="Gray" />
+			<Setter Property="Foreground" Value="Black" />
+		</Style>
+		<Style TargetType="{x:Type Label}">
+			<Setter Property="Background" Value="Gray" />
+			<Setter Property="Foreground" Value="Black" />
+		</Style>
+		<Style TargetType="{x:Type ToggleButton}">
+			<Setter Property="Background" Value="White" />
+			<Setter Property="Width" Value="15" />
+			<Setter Property="Height" Value="15" />
+		</Style>
+	</Window.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto" />
@@ -20,7 +39,7 @@
 			<StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<Label Content="--no-vr" />
-					<ToggleButton IsChecked="{Binding NoVR}" Width="15" Height="15" />
+					<ToggleButton IsChecked="{Binding NoVR}" />
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
@@ -31,7 +50,7 @@
 
 				<StackPanel Orientation="Horizontal">
 					<Label Content="--legacy-fbt-calibrate" />
-					<ToggleButton IsChecked="{Binding LegacyFBTCalibrate}" Width="15" Height="15" />
+					<ToggleButton IsChecked="{Binding LegacyFBTCalibrate}" />
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
@@ -46,12 +65,12 @@
 			<StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<Label Content="--watch-worlds" />
-					<ToggleButton IsChecked="{Binding WatchWorlds}" Width="15" Height="15" />
+					<ToggleButton IsChecked="{Binding WatchWorlds}" />
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
 					<Label Content="--watch-avatars" />
-					<ToggleButton IsChecked="{Binding WatchAvatars}" Width="15" Height="15" />
+					<ToggleButton IsChecked="{Binding WatchAvatars}" />
 				</StackPanel>
 			</StackPanel>
 		</GroupBox>
@@ -60,7 +79,7 @@
 			<StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<Label Content="-screen-fullscreen " Width="110" HorizontalContentAlignment="Left" />
-					<ToggleButton Width="15" Height="15" IsChecked="{Binding Fullscreen}"
+					<ToggleButton IsChecked="{Binding Fullscreen}"
 					              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="32.5,0,0,0" />
 				</StackPanel>
 
@@ -83,22 +102,22 @@
 			<StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<Label Content="--enable-udon-debug-logging" />
-					<ToggleButton IsChecked="{Binding UdonDebugLogging}" Width="15" Height="15" />
+					<ToggleButton IsChecked="{Binding UdonDebugLogging}" />
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
 					<Label Content="--enable-debug-gui" />
-					<ToggleButton IsChecked="{Binding DebugGUI}" Width="15" Height="15" />
+					<ToggleButton IsChecked="{Binding DebugGUI}" />
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
 					<Label Content="--enable-sdk-log-levels" />
-					<ToggleButton IsChecked="{Binding SdkLogLevels}" Width="15" Height="15" />
+					<ToggleButton IsChecked="{Binding SdkLogLevels}" />
 				</StackPanel>
-				
+
 				<StackPanel Orientation="Horizontal">
 					<Label Content="--enable-verbose-logging" />
-					<ToggleButton IsChecked="{Binding VerboseLogging}" Width="15" Height="15" />
+					<ToggleButton IsChecked="{Binding VerboseLogging}" />
 				</StackPanel>
 			</StackPanel>
 		</GroupBox>
