@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel;
 using VRCLauncher.Model;
 
-// ReSharper disable InconsistentNaming
-
 namespace VRCLauncher.ViewModel
 {
 	public class ViewModel
@@ -12,30 +10,31 @@ namespace VRCLauncher.ViewModel
 		public ViewModel()
 		{
 			Config = Config.Load();
-			noVR = NoVR;
-			fps = FPS;
-			legacyFBTCalibrate = LegacyFBTCalibrate;
-			profile = Profile;
-			watchWorlds = WatchWorlds;
-			watchAvatars = WatchAvatars;
-			fullscreen = Fullscreen;
-			width = Width;
-			height = Height;
-			udonDebugLogging = UdonDebugLogging;
-			debugGUI = DebugGUI;
-			sdkLogLevels = SdkLogLevels;
-			midiDevice = MidiDevice;
-			oscPorts = OSCPorts;
+			_noVr = NoVR;
+			_fps = FPS;
+			_legacyFbtCalibrate = LegacyFBTCalibrate;
+			_profile = Profile;
+			_watchWorlds = WatchWorlds;
+			_watchAvatars = WatchAvatars;
+			_fullscreen = Fullscreen;
+			_width = Width;
+			_height = Height;
+			_udonDebugLogging = UdonDebugLogging;
+			_debugGui = DebugGUI;
+			_sdkLogLevels = SdkLogLevels;
+			_verboseLogging = VerboseLogging;
+			_midiDevice = MidiDevice;
+			_oscPorts = OSCPorts;
 		}
 
-		private bool noVR;
+		private bool _noVr;
 
 		public bool NoVR
 		{
 			get => Config.NoVR;
 			set
 			{
-				if (noVR != value)
+				if (_noVr != value)
 				{
 					Config.NoVR = value;
 					Config.Save();
@@ -43,14 +42,14 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private int fps;
+		private int _fps;
 
 		public int FPS
 		{
 			get => Config.FPS;
 			set
 			{
-				if (fps != value)
+				if (_fps != value)
 				{
 					Config.FPS = value;
 					Config.Save();
@@ -58,14 +57,14 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private bool legacyFBTCalibrate;
+		private bool _legacyFbtCalibrate;
 
 		public bool LegacyFBTCalibrate
 		{
 			get => Config.LegacyFBTCalibrate;
 			set
 			{
-				if (LegacyFBTCalibrate != value)
+				if (_legacyFbtCalibrate != value)
 				{
 					Config.LegacyFBTCalibrate = value;
 					Config.Save();
@@ -73,14 +72,14 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private int profile;
+		private int _profile;
 
 		public int Profile
 		{
 			get => Config.Profile;
 			set
 			{
-				if (profile != value)
+				if (_profile != value)
 				{
 					Config.Profile = value;
 					Config.Save();
@@ -88,14 +87,14 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private bool watchWorlds;
+		private bool _watchWorlds;
 
 		public bool WatchWorlds
 		{
 			get => Config.WatchWorlds;
 			set
 			{
-				if (watchWorlds != value)
+				if (_watchWorlds != value)
 				{
 					Config.WatchWorlds = value;
 					Config.Save();
@@ -103,14 +102,14 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private bool watchAvatars;
+		private bool _watchAvatars;
 
 		public bool WatchAvatars
 		{
 			get => Config.WatchAvatars;
 			set
 			{
-				if (watchAvatars != value)
+				if (_watchAvatars != value)
 				{
 					Config.WatchAvatars = value;
 					Config.Save();
@@ -118,14 +117,14 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private bool fullscreen;
+		private bool _fullscreen;
 
 		public bool Fullscreen
 		{
 			get => Config.Fullscreen;
 			set
 			{
-				if (fullscreen != value)
+				if (_fullscreen != value)
 				{
 					Config.Fullscreen = value;
 					Config.Save();
@@ -133,14 +132,14 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private int height;
+		private int _height;
 
 		public int Height
 		{
 			get => Config.Height;
 			set
 			{
-				if (height != value)
+				if (_height != value)
 				{
 					Config.Height = value;
 					Config.Save();
@@ -148,14 +147,14 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private int width;
+		private int _width;
 
 		public int Width
 		{
 			get => Config.Width;
 			set
 			{
-				if (width != value)
+				if (_width != value)
 				{
 					Config.Width = value;
 					Config.Save();
@@ -163,14 +162,14 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private bool udonDebugLogging;
+		private bool _udonDebugLogging;
 
 		public bool UdonDebugLogging
 		{
 			get => Config.UdonDebugLogging;
 			set
 			{
-				if (udonDebugLogging != value)
+				if (_udonDebugLogging != value)
 				{
 					Config.UdonDebugLogging = value;
 					Config.Save();
@@ -178,14 +177,14 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private bool debugGUI;
+		private bool _debugGui;
 
 		public bool DebugGUI
 		{
 			get => Config.DebugGUI;
 			set
 			{
-				if (debugGUI != value)
+				if (_debugGui != value)
 				{
 					Config.DebugGUI = value;
 					Config.Save();
@@ -193,29 +192,44 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private bool sdkLogLevels;
+		private bool _sdkLogLevels;
 
 		public bool SdkLogLevels
 		{
 			get => Config.SDKLogLevels;
 			set
 			{
-				if (sdkLogLevels != value)
+				if (_sdkLogLevels != value)
 				{
 					Config.SDKLogLevels = value;
 					Config.Save();
 				}
 			}
 		}
+		
+		private bool _verboseLogging;
 
-		private string midiDevice;
+		public bool VerboseLogging
+		{
+			get => Config.VerboseLogging;
+			set
+			{
+				if (_verboseLogging != value)
+				{
+					Config.VerboseLogging = value;
+					Config.Save();
+				}
+			}
+		}
+
+		private string _midiDevice;
 
 		public string MidiDevice
 		{
 			get => Config.MidiDevice;
 			set
 			{
-				if (midiDevice != value)
+				if (_midiDevice != value)
 				{
 					Config.MidiDevice = value;
 					Config.Save();
@@ -223,14 +237,14 @@ namespace VRCLauncher.ViewModel
 			}
 		}
 
-		private string oscPorts;
+		private string _oscPorts;
 
 		public string OSCPorts
 		{
 			get => Config.OSCPorts;
 			set
 			{
-				if (oscPorts != value)
+				if (_oscPorts != value)
 				{
 					Config.OSCPorts = value;
 					Config.Save();

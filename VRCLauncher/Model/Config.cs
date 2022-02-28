@@ -12,12 +12,6 @@ namespace VRCLauncher.Model
 {
 	public class Config
 	{
-		static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\3\\VRCLauncher";
-
-		//private static string ExpandedUserFolderPath = Environment.ExpandEnvironmentVariables(@"%AppData%\..\LocalLow\VRCLauncher");
-		//private static string _VRChatLocation = FindVRCexePath();
-		//public string GetLocalResourcePath(string path) => Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + path;
-
 		public bool NoVR { get; set; }
 		public int FPS { get; set; }
 		public bool LegacyFBTCalibrate { get; set; }
@@ -30,6 +24,7 @@ namespace VRCLauncher.Model
 		public bool UdonDebugLogging { get; set; }
 		public bool DebugGUI { get; set; }
 		public bool SDKLogLevels { get; set; }
+		public bool VerboseLogging { get; set; }
 		public string MidiDevice { get; set; }
 		public string OSCPorts { get; set; }
 
@@ -47,6 +42,7 @@ namespace VRCLauncher.Model
 			UdonDebugLogging = false;
 			DebugGUI = false;
 			SDKLogLevels = false;
+			VerboseLogging = false;
 			MidiDevice = "";
 			OSCPorts = "";
 		}
@@ -67,23 +63,32 @@ namespace VRCLauncher.Model
 
 		public void Save()
 		{
-			if (!Directory.Exists(AppDataPath)) Directory.CreateDirectory(AppDataPath);
+			string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\3\\VRCLauncher";
+			if (!Directory.Exists(appDataPath)) Directory.CreateDirectory(appDataPath);
 
 			string json = JsonSerializer.Serialize(this);
-			File.WriteAllText(AppDataPath + "\\config.json", json);
+			File.WriteAllText(appDataPath + "\\config.json", json);
 		}
 
 		public static Config Load()
 		{
-			if (File.Exists(AppDataPath + "\\config.json"))
+			Config config = new();
+			string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\3\\VRCLauncher";
+			if (File.Exists(appDataPath + "\\config.json"))
 			{
-				string json = File.ReadAllText(AppDataPath + "\\config.json");
-				return JsonSerializer.Deserialize<Config>(json)!;
+				string json = File.ReadAllText(appDataPath + "\\config.json");
+				try
+				{
+					config = JsonSerializer.Deserialize<Config>(json)!;
+				}
+				catch (Exception e)
+				{
+					MessageBox.Show("Error loading config.json: " + e.Message);
+					config = new();
+				}
 			}
-			else
-			{
-				return new Config();
-			}
+
+			return config;
 		}
 
 		public List<string> GetArgs()
@@ -107,7 +112,10 @@ namespace VRCLauncher.Model
 
 			if (SDKLogLevels) args.Add("--enable-sdk-log-levels");
 
+			if (VerboseLogging) args.Add("--enable-verbose-logging");
+
 			if (Fullscreen) args.Add("-screen-fullscreen 1");
+			else args.Add("-screen-fullscreen 0");
 
 			if (Width != 0) args.Add("-screen-width " + Width);
 

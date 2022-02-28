@@ -95,6 +95,11 @@
 					<Label Content="--enable-sdk-log-levels" />
 					<ToggleButton IsChecked="{Binding SdkLogLevels}" Width="15" Height="15" />
 				</StackPanel>
+				
+				<StackPanel Orientation="Horizontal">
+					<Label Content="--enable-verbose-logging" />
+					<ToggleButton IsChecked="{Binding VerboseLogging}" Width="15" Height="15" />
+				</StackPanel>
 			</StackPanel>
 		</GroupBox>
 

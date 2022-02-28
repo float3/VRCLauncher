@@ -8,10 +8,9 @@ namespace VRCLauncher
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow
 	{
 		private ViewModel.ViewModel _viewModel = new();
-
 
 		public MainWindow()
 		{
