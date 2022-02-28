@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using VRCLauncher.Model;
+﻿using VRCLauncher.Model;
 
 namespace VRCLauncher.ViewModel
 {
