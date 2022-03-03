@@ -127,9 +127,9 @@ namespace VRCLauncher.ViewModel
             }
         }
 
-        private int _fullscreen;
+        private bool _fullscreen;
 
-        public int Fullscreen
+        public bool Fullscreen
         {
             get => Config.Fullscreen;
             set

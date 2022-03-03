@@ -17,7 +17,7 @@ namespace VRCLauncher.Model
         public int Profile { get; set; }
         public bool WatchWorlds { get; set; }
         public bool WatchAvatars { get; set; }
-        public int Fullscreen { get; set; }
+        public bool Fullscreen { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         public int Monitor { get; set; }
@@ -37,7 +37,7 @@ namespace VRCLauncher.Model
             Profile = 0;
             WatchWorlds = false;
             WatchAvatars = false;
-            Fullscreen = 1;
+            Fullscreen = true;
             Width = 0;
             Height = 0;
             Monitor = 0;
@@ -122,7 +122,7 @@ namespace VRCLauncher.Model
 
             if (VerboseLogging) args.Add("--enable-verbose-logging");
 
-            args.Add("-screen-fullscreen " + Fullscreen);
+            args.Add("-screen-fullscreen " + (Fullscreen ? 1 : 0));
 
             if (Width != 0) args.Add("-screen-width " + Width);
 

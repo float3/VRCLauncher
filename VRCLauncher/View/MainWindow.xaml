@@ -68,9 +68,8 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="-screen-fullscreen " Width="110" HorizontalContentAlignment="Left" />
-                    <TextBox Text="{Binding Fullscreen}" Width="80" TextAlignment="Center"
-                             HorizontalContentAlignment="Center"
-                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    <CheckBox IsChecked="{Binding Fullscreen}"
+                              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40,0,0,0" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
@@ -131,7 +130,7 @@
 
                         <TextBox.Resources>
                             <VisualBrush
-                                x:Key="hinttext"
+                                x:Key="Watermark"
                                 AlignmentX="Left"
                                 Stretch="None"
                                 TileMode="None">
@@ -151,11 +150,11 @@
                                 <Setter Property="Background" Value="Transparent" />
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="">
-                                        <Setter Property="Background" Value="{StaticResource hinttext}" />
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
                                     </Trigger>
 
                                     <Trigger Property="Text" Value="{x:Null}">
-                                        <Setter Property="Background" Value="{StaticResource hinttext}" />
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -172,7 +171,7 @@
 
                         <TextBox.Resources>
                             <VisualBrush
-                                x:Key="hinttext"
+                                x:Key="Watermark"
                                 AlignmentX="Left"
                                 Stretch="None"
                                 TileMode="None">
@@ -192,11 +191,11 @@
                                 <Setter Property="Background" Value="Transparent" />
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="">
-                                        <Setter Property="Background" Value="{StaticResource hinttext}" />
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
                                     </Trigger>
 
                                     <Trigger Property="Text" Value="{x:Null}">
-                                        <Setter Property="Background" Value="{StaticResource hinttext}" />
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -212,7 +211,7 @@
 
                         <TextBox.Resources>
                             <VisualBrush
-                                x:Key="Hinttext"
+                                x:Key="Watermark"
                                 AlignmentX="Left"
                                 Stretch="None"
                                 TileMode="None">
@@ -232,11 +231,11 @@
                                 <Setter Property="Background" Value="Transparent" />
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="">
-                                        <Setter Property="Background" Value="{StaticResource Hinttext}" />
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
                                     </Trigger>
 
                                     <Trigger Property="Text" Value="{x:Null}">
-                                        <Setter Property="Background" Value="{StaticResource Hinttext}" />
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
