@@ -56,12 +56,12 @@ namespace VRCLauncher.Model
             try
             {
                 return Registry.LocalMachine
-                    .OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App " + 438100)
-                    .GetValue("InstallLocation").ToString();
+                    .OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App " + 438100)!
+                    .GetValue("InstallLocation")!.ToString() ?? throw new InvalidOperationException();
             }
             catch
             {
-                MessageBox.Show("Error - Registry entry not present or null");
+                MessageBox.Show("Error - Registry entry not present or null" + "\n VRChat not installed through steam");
                 throw new Exception("VRChat not installed through steam");
             }
         }
