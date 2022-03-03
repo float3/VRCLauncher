@@ -4,84 +4,74 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="VRCLauncher" Height="450" Width="800" Background="Gray" Foreground="Black">
-	<Window.Resources>
-		<Style TargetType="{x:Type TextBox}">
-			<Setter Property="Background" Value="White" />
-			<Setter Property="Foreground" Value="Black" />
-		</Style>
-		<Style TargetType="{x:Type Button}">
-			<Setter Property="Background" Value="Gray" />
-			<Setter Property="Foreground" Value="Black" />
-		</Style>
-		<Style TargetType="{x:Type Label}">
-			<Setter Property="Background" Value="Gray" />
-			<Setter Property="Foreground" Value="Black" />
-		</Style>
-		<Style TargetType="{x:Type ToggleButton}">
-			<Setter Property="Background" Value="White" />
-			<Setter Property="Width" Value="15" />
-			<Setter Property="Height" Value="15" />
-		</Style>
-	</Window.Resources>
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-		</Grid.RowDefinitions>
+        Title="VRCLauncher" Height="500" Width="700">
+    <Window.Resources>
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Width" Value="15" />
+            <Setter Property="Height" Value="15" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-		<GroupBox Header="Main" Margin="10" Padding="10" Grid.Row="0" Grid.Column="0">
-			<StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="--no-vr" />
-					<ToggleButton IsChecked="{Binding NoVR}" />
-				</StackPanel>
+        <GroupBox Header="Main" Margin="10" Padding="10" Grid.Row="0" Grid.Column="0">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--no-vr" />
+                    <CheckBox IsChecked="{Binding NoVR}" />
+                </StackPanel>
 
-				<StackPanel Orientation="Horizontal">
-					<Label Content="--fps=" />
-					<TextBox Text="{Binding FPS}" Width="25" TextAlignment="Center" HorizontalContentAlignment="Center"
-					         HorizontalAlignment="Center" VerticalAlignment="Center" />
-				</StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--fps=" />
+                    <TextBox Text="{Binding FPS}" Width="25" TextAlignment="Center" HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </StackPanel>
 
-				<StackPanel Orientation="Horizontal">
-					<Label Content="--legacy-fbt-calibrate" />
-					<ToggleButton IsChecked="{Binding LegacyFBTCalibrate}" />
-				</StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--legacy-fbt-calibrate" />
+                    <CheckBox IsChecked="{Binding LegacyFBTCalibrate}" />
+                </StackPanel>
 
-				<StackPanel Orientation="Horizontal">
-					<Label Content="-profile=" />
-					<TextBox Text="{Binding Profile}" Width="25" TextAlignment="Center" HorizontalContentAlignment="Center"
-					         HorizontalAlignment="Center" VerticalAlignment="Center" />
-				</StackPanel>
-			</StackPanel>
-		</GroupBox>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="-profile=" />
+                    <TextBox Text="{Binding Profile}" Width="25" TextAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
 
-		<GroupBox Header="Watchers" Margin="10" Padding="10" Grid.Row="0" Grid.Column="1">
-			<StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="--watch-worlds" />
-					<ToggleButton IsChecked="{Binding WatchWorlds}" />
-				</StackPanel>
+        <GroupBox Header="Watchers" Margin="10" Padding="10" Grid.Row="0" Grid.Column="1">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--watch-worlds" />
+                    <CheckBox IsChecked="{Binding WatchWorlds}" />
+                </StackPanel>
 
-				<StackPanel Orientation="Horizontal">
-					<Label Content="--watch-avatars" />
-					<ToggleButton IsChecked="{Binding WatchAvatars}" />
-				</StackPanel>
-			</StackPanel>
-		</GroupBox>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--watch-avatars" />
+                    <CheckBox IsChecked="{Binding WatchAvatars}" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
 
-		<GroupBox Header="Screen Overrides" Margin="10" Padding="10" Grid.Row="0" Grid.Column="2">
-			<StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="-screen-fullscreen " Width="110" HorizontalContentAlignment="Left" />
-					<ToggleButton IsChecked="{Binding Fullscreen}"
-					              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="32.5,0,0,0" />
-				</StackPanel>
+        <GroupBox Header="Screen Overrides" Margin="10" Padding="10" Grid.Row="0" Grid.Column="2">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="-screen-fullscreen " Width="110" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding Fullscreen}" Width="80" TextAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                </StackPanel>
 
 				<StackPanel Orientation="Horizontal">
 					<Label Content="-screen-width " Width="100" HorizontalContentAlignment="Left" />
@@ -95,32 +85,32 @@
 					         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
 				</StackPanel>
 
-			</StackPanel>
-		</GroupBox>
+            </StackPanel>
+        </GroupBox>
 
-		<GroupBox Header="Logging" Margin="10" Padding="10" Grid.Row="1" Grid.Column="0">
-			<StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="--enable-udon-debug-logging" />
-					<ToggleButton IsChecked="{Binding UdonDebugLogging}" />
-				</StackPanel>
+        <GroupBox Header="Logging" Margin="10" Padding="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--enable-udon-debug-logging" />
+                    <CheckBox IsChecked="{Binding UdonDebugLogging}" />
+                </StackPanel>
 
-				<StackPanel Orientation="Horizontal">
-					<Label Content="--enable-debug-gui" />
-					<ToggleButton IsChecked="{Binding DebugGUI}" />
-				</StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--enable-debug-gui" />
+                    <CheckBox IsChecked="{Binding DebugGUI}" />
+                </StackPanel>
 
-				<StackPanel Orientation="Horizontal">
-					<Label Content="--enable-sdk-log-levels" />
-					<ToggleButton IsChecked="{Binding SdkLogLevels}" />
-				</StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--enable-sdk-log-levels" />
+                    <CheckBox IsChecked="{Binding SDKLogLevels}" />
+                </StackPanel>
 
-				<StackPanel Orientation="Horizontal">
-					<Label Content="--enable-verbose-logging" />
-					<ToggleButton IsChecked="{Binding VerboseLogging}" />
-				</StackPanel>
-			</StackPanel>
-		</GroupBox>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--enable-verbose-logging" />
+                    <CheckBox IsChecked="{Binding VerboseLogging}" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
 
 		<GroupBox Header="Misc" Margin="10" Padding="10" Grid.Row="1" Grid.Column="1">
 			<StackPanel>
@@ -140,6 +130,6 @@
 			</StackPanel>
 		</GroupBox>
 
-		<Button Content="Launch" Margin="10" Padding="10" Grid.Row="1" Grid.Column="2" Click="Launch" />
-	</Grid>
+        <Button Content="Launch" Margin="10" Padding="10" Grid.Row="1" Grid.Column="2" Click="Launch" />
+    </Grid>
 </Window>
