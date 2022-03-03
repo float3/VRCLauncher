@@ -73,17 +73,26 @@
                              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
                 </StackPanel>
 
-				<StackPanel Orientation="Horizontal">
-					<Label Content="-screen-width " Width="100" HorizontalContentAlignment="Left" />
-					<TextBox Text="{Binding Width}" Width="80" TextAlignment="Center" HorizontalContentAlignment="Center"
-					         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
-				</StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="-screen-width " Width="110" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding Width}" Width="80" TextAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                </StackPanel>
 
-				<StackPanel Orientation="Horizontal">
-					<Label Content="-screen-heigth " Width="100" HorizontalContentAlignment="Left" />
-					<TextBox Text="{Binding Height}" Width="80" TextAlignment="Center" HorizontalContentAlignment="Center"
-					         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
-				</StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="-screen-heigth " Width="110" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding Height}" Width="80" TextAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="-monitor " Width="110" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding Monitor}" Width="80" TextAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                </StackPanel>
 
             </StackPanel>
         </GroupBox>
@@ -112,23 +121,131 @@
             </StackPanel>
         </GroupBox>
 
-		<GroupBox Header="Misc" Margin="10" Padding="10" Grid.Row="1" Grid.Column="1">
-			<StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="--midi=" Width="50" HorizontalContentAlignment="Left" />
-					<TextBox Text="{Binding MidiDevice}" Width="150" TextAlignment="Center"
-					         HorizontalContentAlignment="Center"
-					         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
-				</StackPanel>
+        <GroupBox Header="Misc" Margin="10" Padding="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--midi=" Width="50" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding MidiDevice}" Width="450" TextAlignment="Left"
+                             HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
 
-				<StackPanel Orientation="Horizontal">
-					<Label Content="--osc=" Width="50" HorizontalContentAlignment="Left" />
-					<TextBox Text="{Binding OSCPorts}" Width="150" TextAlignment="Center"
-					         HorizontalContentAlignment="Center"
-					         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
-				</StackPanel>
-			</StackPanel>
-		</GroupBox>
+                        <TextBox.Resources>
+                            <VisualBrush
+                                x:Key="hinttext"
+                                AlignmentX="Left"
+                                Stretch="None"
+                                TileMode="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock
+                                        FontStyle="Italic"
+                                        Foreground="#959595"
+                                        Text="deviceName" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </TextBox.Resources>
+
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="">
+                                        <Setter Property="Background" Value="{StaticResource hinttext}" />
+                                    </Trigger>
+
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource hinttext}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--osc=" Width="50" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding OSCPorts}" Width="450" TextAlignment="Left"
+                             HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
+
+                        <TextBox.Resources>
+                            <VisualBrush
+                                x:Key="hinttext"
+                                AlignmentX="Left"
+                                Stretch="None"
+                                TileMode="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock
+                                        FontStyle="Italic"
+                                        Foreground="#959595"
+                                        Text="9000:127.0.0.1:9001 (inPort:senderIP:outPort)" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </TextBox.Resources>
+
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="">
+                                        <Setter Property="Background" Value="{StaticResource hinttext}" />
+                                    </Trigger>
+
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource hinttext}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding LaunchInstance}" Width="500" TextAlignment="Left"
+                             HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
+
+                        <TextBox.Resources>
+                            <VisualBrush
+                                x:Key="Hinttext"
+                                AlignmentX="Left"
+                                Stretch="None"
+                                TileMode="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock
+                                        FontStyle="Italic"
+                                        Foreground="#959595"
+                                        Text="vrchat://launch?ref=vrchat.com&amp;id=wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd:0" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </TextBox.Resources>
+
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="">
+                                        <Setter Property="Background" Value="{StaticResource Hinttext}" />
+                                    </Trigger>
+
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource Hinttext}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+
+                    </TextBox>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
 
         <Button Content="Launch" Margin="10" Padding="10" Grid.Row="1" Grid.Column="2" Click="Launch" />
     </Grid>
