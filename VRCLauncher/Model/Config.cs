@@ -9,130 +9,134 @@ using Microsoft.Win32;
 
 namespace VRCLauncher.Model
 {
-	public class Config
-	{
-		public bool NoVR { get; set; }
-		public int FPS { get; set; }
-		public bool LegacyFBTCalibrate { get; set; }
-		public int Profile { get; set; }
-		public bool WatchWorlds { get; set; }
-		public bool WatchAvatars { get; set; }
-		public bool Fullscreen { get; set; }
-		public int Width { get; set; }
-		public int Height { get; set; }
-		public int Monitor { get; set; }
-		public bool UdonDebugLogging { get; set; }
-		public bool DebugGUI { get; set; }
-		public bool SDKLogLevels { get; set; }
-		public bool VerboseLogging { get; set; }
-		public string MidiDevice { get; set; }
-		public string OSCPorts { get; set; }
-		public string LaunchInstance { get; set; }
+    public class Config
+    {
+        public bool NoVR { get; set; }
+        public int FPS { get; set; }
+        public bool LegacyFBTCalibrate { get; set; }
+        public int Profile { get; set; }
+        public bool WatchWorlds { get; set; }
+        public bool WatchAvatars { get; set; }
+        public int Fullscreen { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int Monitor { get; set; }
+        public bool UdonDebugLogging { get; set; }
+        public bool DebugGUI { get; set; }
+        public bool SDKLogLevels { get; set; }
+        public bool VerboseLogging { get; set; }
+        public string MidiDevice { get; set; }
+        public string OSCPorts { get; set; }
+        public string LaunchInstance { get; set; }
 
-		public Config()
-		{
-			NoVR = false;
-			FPS = 90;
-			LegacyFBTCalibrate = false;
-			Profile = 0;
-			WatchWorlds = false;
-			WatchAvatars = false;
-			Fullscreen = true;
-			Width = 0;
-			Height = 0;
-			Monitor = 0;
-			UdonDebugLogging = false;
-			DebugGUI = false;
-			SDKLogLevels = false;
-			VerboseLogging = false;
-			MidiDevice = "";
-			OSCPorts = "";
-			LaunchInstance = "";
-		}
+        public Config()
+        {
+            NoVR = false;
+            FPS = 90;
+            LegacyFBTCalibrate = false;
+            Profile = 0;
+            WatchWorlds = false;
+            WatchAvatars = false;
+            Fullscreen = 1;
+            Width = 0;
+            Height = 0;
+            Monitor = 0;
+            UdonDebugLogging = false;
+            DebugGUI = false;
+            SDKLogLevels = false;
+            VerboseLogging = false;
+            MidiDevice = "";
+            OSCPorts = "";
+            LaunchInstance = "";
+        }
 
-		// ReSharper disable once IdentifierTypo
-		public static string FindVRCexePath()
-		{
-			try
-			{
-				return Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App " + 438100).GetValue("InstallLocation").ToString();
-			}
-			catch
-			{
-				MessageBox.Show("Error - Registry entry not present or null");
-				throw new Exception("VRChat not installed through steam");
-			}
-		}
+        // ReSharper disable once IdentifierTypo
+        public static string FindVRCexePath()
+        {
+            try
+            {
+                return Registry.LocalMachine
+                    .OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App " + 438100)
+                    .GetValue("InstallLocation").ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Error - Registry entry not present or null");
+                throw new Exception("VRChat not installed through steam");
+            }
+        }
 
-		public void Save()
-		{
-			string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\3\\VRCLauncher";
-			if (!Directory.Exists(appDataPath)) Directory.CreateDirectory(appDataPath);
+        public void Save()
+        {
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
+                                 "\\3\\VRCLauncher";
+            if (!Directory.Exists(appDataPath)) Directory.CreateDirectory(appDataPath);
 
-			string json = JsonSerializer.Serialize(this);
-			File.WriteAllText(appDataPath + "\\config.json", json);
-		}
+            string json = JsonSerializer.Serialize(this);
+            File.WriteAllText(appDataPath + "\\config.json", json);
+        }
 
-		public static Config Load()
-		{
-			Config config = new();
-			string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\3\\VRCLauncher";
-			if (File.Exists(appDataPath + "\\config.json"))
-			{
-				string json = File.ReadAllText(appDataPath + "\\config.json");
-				try
-				{
-					config = JsonSerializer.Deserialize<Config>(json)!;
-				}
-				catch (Exception e)
-				{
-					MessageBox.Show("Error loading config.json: " + e.Message);
-					config = new();
-				}
-			}
+        public static Config Load()
+        {
+            Config config = new();
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
+                                 "\\3\\VRCLauncher";
+            if (File.Exists(appDataPath + "\\config.json"))
+            {
+                string json = File.ReadAllText(appDataPath + "\\config.json");
+                try
+                {
+                    config = JsonSerializer.Deserialize<Config>(json)!;
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error loading config.json: \n" + e.Message + "\n this might be due to a update");
+                    config = new();
+                }
+            }
 
-			return config;
-		}
+            return config;
+        }
 
-		public List<string> GetArgs()
-		{
-			List<string> args = new();
-			if (NoVR) args.Add("--no-vr");
+        public List<string> GetArgs()
+        {
+            List<string> args = new();
 
-			args.Add("--fps=" + FPS);
+            if (NoVR) args.Add("--no-vr");
 
-			if (LegacyFBTCalibrate) args.Add("--legacy-fbt-calibrate");
+            args.Add("--fps=" + FPS);
 
-			args.Add("-profile=" + Profile);
+            if (LegacyFBTCalibrate) args.Add("--legacy-fbt-calibrate");
 
-			if (WatchWorlds) args.Add("--watch-worlds");
+            args.Add("-profile=" + Profile);
 
-			if (WatchAvatars) args.Add("--watch-avatars");
+            if (WatchWorlds) args.Add("--watch-worlds");
 
-			if (UdonDebugLogging) args.Add("--enable-udon-debug-logging");
+            if (WatchAvatars) args.Add("--watch-avatars");
 
-			if (DebugGUI) args.Add("--enable-debug-gui");
+            if (UdonDebugLogging) args.Add("--enable-udon-debug-logging");
 
-			if (SDKLogLevels) args.Add("--enable-sdk-log-levels");
+            if (DebugGUI) args.Add("--enable-debug-gui");
 
-			if (VerboseLogging) args.Add("--enable-verbose-logging");
+            if (SDKLogLevels) args.Add("--enable-sdk-log-levels");
 
-			if (Fullscreen) args.Add("-screen-fullscreen 1");
-			else args.Add("-screen-fullscreen 0");
+            if (VerboseLogging) args.Add("--enable-verbose-logging");
 
-			if (Width != 0) args.Add("-screen-width " + Width);
+            args.Add("-screen-fullscreen " + Fullscreen);
 
-			if (Height != 0) args.Add("-screen-height " + Height);
-			
-			args.Add("-monitor " + Monitor);
+            if (Width != 0) args.Add("-screen-width " + Width);
 
-			if (MidiDevice != "") args.Add("-midi=" + MidiDevice);
+            if (Height != 0) args.Add("-screen-height " + Height);
 
-			if (OSCPorts != "") args.Add("-osc-ports=" + OSCPorts);
-			
-			if (LaunchInstance != "") args.Add(LaunchInstance);
+            args.Add("-monitor " + Monitor);
 
-			return args;
-		}
-	}
+            if (MidiDevice != "") args.Add("-midi=" + MidiDevice);
+
+            if (OSCPorts != "") args.Add("-osc-ports=" + OSCPorts);
+
+            if (LaunchInstance != "") args.Add(LaunchInstance);
+
+            return args;
+        }
+    }
 }
