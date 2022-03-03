@@ -20,12 +20,14 @@ namespace VRCLauncher.Model
 		public bool Fullscreen { get; set; }
 		public int Width { get; set; }
 		public int Height { get; set; }
+		public int Monitor { get; set; }
 		public bool UdonDebugLogging { get; set; }
 		public bool DebugGUI { get; set; }
 		public bool SDKLogLevels { get; set; }
 		public bool VerboseLogging { get; set; }
 		public string MidiDevice { get; set; }
 		public string OSCPorts { get; set; }
+		public string LaunchInstance { get; set; }
 
 		public Config()
 		{
@@ -38,12 +40,14 @@ namespace VRCLauncher.Model
 			Fullscreen = true;
 			Width = 0;
 			Height = 0;
+			Monitor = 0;
 			UdonDebugLogging = false;
 			DebugGUI = false;
 			SDKLogLevels = false;
 			VerboseLogging = false;
 			MidiDevice = "";
 			OSCPorts = "";
+			LaunchInstance = "";
 		}
 
 		// ReSharper disable once IdentifierTypo
@@ -119,10 +123,14 @@ namespace VRCLauncher.Model
 			if (Width != 0) args.Add("-screen-width " + Width);
 
 			if (Height != 0) args.Add("-screen-height " + Height);
+			
+			args.Add("-monitor " + Monitor);
 
 			if (MidiDevice != "") args.Add("-midi=" + MidiDevice);
 
 			if (OSCPorts != "") args.Add("-osc-ports=" + OSCPorts);
+			
+			if (LaunchInstance != "") args.Add(LaunchInstance);
 
 			return args;
 		}
