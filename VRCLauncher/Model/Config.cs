@@ -122,7 +122,7 @@ namespace VRCLauncher.Model
 
             if (VerboseLogging) args.Add("--enable-verbose-logging");
 
-            args.Add("-screen-fullscreen " + (Fullscreen ? 1 : 0));
+            args.Add("-screen-fullscreen " + (Fullscreen ? "1" : "0"));
 
             if (Width != 0) args.Add("-screen-width " + Width);
 
