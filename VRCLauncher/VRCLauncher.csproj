@@ -5,6 +5,9 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <PackageVersion>0.3</PackageVersion>
+        <Title>VRCLauncher</Title>
+        <Authors>3</Authors>
     </PropertyGroup>
 
 </Project>
