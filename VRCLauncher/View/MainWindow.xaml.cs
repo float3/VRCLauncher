@@ -17,6 +17,8 @@ namespace VRCLauncher
             DataContext = _viewModel;
             Application.Current.Exit += OnApplicationExit;
         }
+        
+        TEST
 
         private void OnApplicationExit(object sender, ExitEventArgs e)
         {
