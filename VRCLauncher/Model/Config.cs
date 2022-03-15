@@ -28,6 +28,7 @@ namespace VRCLauncher.Model
         public string MidiDevice { get; set; }
         public string OSCPorts { get; set; }
         public string LaunchInstance { get; set; }
+        public string ArbitraryArguments { get; set; }
 
         public Config()
         {
@@ -48,6 +49,7 @@ namespace VRCLauncher.Model
             MidiDevice = "";
             OSCPorts = "";
             LaunchInstance = "";
+            ArbitraryArguments = "";
         }
 
         // ReSharper disable once IdentifierTypo
@@ -122,19 +124,34 @@ namespace VRCLauncher.Model
 
             if (VerboseLogging) args.Add("--enable-verbose-logging");
 
-            args.Add("-screen-fullscreen " + (Fullscreen ? 1 : 0));
+            args.Add("-screen-fullscreen");
+            args.Add(Fullscreen ? "1" : "0");
 
-            if (Width != 0) args.Add("-screen-width " + Width);
+            if (Width != 0)
+            {
+                args.Add("-screen-width");
+                args.Add(Width.ToString());
+            }
 
-            if (Height != 0) args.Add("-screen-height " + Height);
+            if (Height != 0)
+            {
+                args.Add("-screen-height");
+                args.Add(Height.ToString());
+            }
 
-            args.Add("-monitor " + Monitor);
+            args.Add("-monitor");
+            args.Add(Monitor.ToString());
 
             if (MidiDevice != "") args.Add("-midi=" + MidiDevice);
 
             if (OSCPorts != "") args.Add("-osc-ports=" + OSCPorts);
 
             if (LaunchInstance != "") args.Add(LaunchInstance);
+
+            if (ArbitraryArguments != "")
+            {
+                args.AddRange(ArbitraryArguments.Split(" "));
+            }
 
             return args;
         }

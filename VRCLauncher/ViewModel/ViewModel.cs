@@ -29,6 +29,7 @@ namespace VRCLauncher.ViewModel
             _midiDevice = MidiDevice;
             _oscPorts = OSCPorts;
             _launchInstance = LaunchInstance;
+            _arbitraryArguments = ArbitraryArguments;
         }
 
         private bool _noVR;
@@ -40,6 +41,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_noVR != value)
                 {
+                    _noVR = value;
                     Config.NoVR = value;
                     Config.Save();
                     OnPropertyChanged(nameof(NoVR));
@@ -56,6 +58,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_fps != value)
                 {
+                    _fps = value;
                     Config.FPS = value;
                     Config.Save();
                     OnPropertyChanged(nameof(FPS));
@@ -72,6 +75,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_legacyFBTCalibrate != value)
                 {
+                    _legacyFBTCalibrate = value;
                     Config.LegacyFBTCalibrate = value;
                     Config.Save();
                     OnPropertyChanged(nameof(LegacyFBTCalibrate));
@@ -88,6 +92,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_profile != value)
                 {
+                    _profile = value;
                     Config.Profile = value;
                     Config.Save();
                     OnPropertyChanged(nameof(Profile));
@@ -104,6 +109,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_watchWorlds != value)
                 {
+                    _watchWorlds = value;
                     Config.WatchWorlds = value;
                     Config.Save();
                     OnPropertyChanged(nameof(WatchWorlds));
@@ -120,6 +126,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_watchAvatars != value)
                 {
+                    _watchAvatars = value;
                     Config.WatchAvatars = value;
                     Config.Save();
                     OnPropertyChanged(nameof(WatchAvatars));
@@ -136,6 +143,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_fullscreen != value)
                 {
+                    _fullscreen = value;
                     Config.Fullscreen = value;
                     Config.Save();
                     OnPropertyChanged(nameof(Fullscreen));
@@ -152,6 +160,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_height != value)
                 {
+                    _height = value;
                     Config.Height = value;
                     Config.Save();
                     OnPropertyChanged(nameof(Height));
@@ -168,6 +177,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_width != value)
                 {
+                    _width = value;
                     Config.Width = value;
                     Config.Save();
                     OnPropertyChanged(nameof(Width));
@@ -184,6 +194,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_monitor != value)
                 {
+                    _monitor = value;
                     Config.Monitor = value;
                     Config.Save();
                     OnPropertyChanged(nameof(Monitor));
@@ -200,6 +211,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_udonDebugLogging != value)
                 {
+                    _udonDebugLogging = value;
                     Config.UdonDebugLogging = value;
                     Config.Save();
                     OnPropertyChanged(nameof(UdonDebugLogging));
@@ -216,6 +228,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_debugGUI != value)
                 {
+                    _debugGUI = value;
                     Config.DebugGUI = value;
                     Config.Save();
                     OnPropertyChanged(nameof(DebugGUI));
@@ -232,6 +245,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_sdkLogLevels != value)
                 {
+                    _sdkLogLevels = value;
                     Config.SDKLogLevels = value;
                     Config.Save();
                     OnPropertyChanged(nameof(VerboseLogging));
@@ -248,6 +262,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_verboseLogging != value)
                 {
+                    _verboseLogging = value;
                     Config.VerboseLogging = value;
                     Config.Save();
                     OnPropertyChanged(nameof(VerboseLogging));
@@ -264,6 +279,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_midiDevice != value)
                 {
+                    _midiDevice = value;
                     Config.MidiDevice = value;
                     Config.Save();
                     OnPropertyChanged(nameof(MidiDevice));
@@ -280,6 +296,7 @@ namespace VRCLauncher.ViewModel
             {
                 if (_oscPorts != value)
                 {
+                    _oscPorts = value;
                     Config.OSCPorts = value;
                     Config.Save();
                     OnPropertyChanged(nameof(OSCPorts));
@@ -296,9 +313,27 @@ namespace VRCLauncher.ViewModel
             {
                 if (_launchInstance != value)
                 {
+                    _launchInstance = value;
                     Config.LaunchInstance = value;
                     Config.Save();
                     OnPropertyChanged(nameof(LaunchInstance));
+                }
+            }
+        }
+        
+        private string _arbitraryArguments;
+        
+        public string ArbitraryArguments
+        {
+            get => Config.ArbitraryArguments;
+            set
+            {
+                if (_arbitraryArguments != value)
+                {
+                    _arbitraryArguments = value;
+                    Config.ArbitraryArguments = value;
+                    Config.Save();
+                    OnPropertyChanged(nameof(ArbitraryArguments));
                 }
             }
         }
