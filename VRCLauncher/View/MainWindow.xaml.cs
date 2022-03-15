@@ -18,8 +18,6 @@ namespace VRCLauncher
             Application.Current.Exit += OnApplicationExit;
         }
         
-        TEST
-
         private void OnApplicationExit(object sender, ExitEventArgs e)
         {
             _viewModel.Config.Save();
