@@ -8,6 +8,8 @@
         <PackageVersion>0.3</PackageVersion>
         <Title>VRCLauncher</Title>
         <Authors>3</Authors>
+        <Configurations>Release</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
 </Project>
