@@ -243,6 +243,47 @@
 
                     </TextBox>
                 </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding ArbitraryArguments}" Width="500" TextAlignment="Left"
+                             HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5,0,0">
+
+                        <TextBox.Resources>
+                            <VisualBrush
+                                x:Key="Watermark"
+                                AlignmentX="Left"
+                                Stretch="None"
+                                TileMode="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock
+                                        FontStyle="Italic"
+                                        Foreground="#959595"
+                                        Text="--space-for-arbitrary-arguments --seperate-with-space" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </TextBox.Resources>
+
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="">
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
+                                    </Trigger>
+
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+
+                    </TextBox>
+                </StackPanel>
+
             </StackPanel>
         </GroupBox>
 

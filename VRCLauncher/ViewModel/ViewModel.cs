@@ -29,6 +29,7 @@ namespace VRCLauncher.ViewModel
             _midiDevice = MidiDevice;
             _oscPorts = OSCPorts;
             _launchInstance = LaunchInstance;
+            _arbitraryArguments = ArbitraryArguments;
         }
 
         private bool _noVR;
@@ -316,6 +317,23 @@ namespace VRCLauncher.ViewModel
                     Config.LaunchInstance = value;
                     Config.Save();
                     OnPropertyChanged(nameof(LaunchInstance));
+                }
+            }
+        }
+        
+        private string _arbitraryArguments;
+        
+        public string ArbitraryArguments
+        {
+            get => Config.ArbitraryArguments;
+            set
+            {
+                if (_arbitraryArguments != value)
+                {
+                    _arbitraryArguments = value;
+                    Config.ArbitraryArguments = value;
+                    Config.Save();
+                    OnPropertyChanged(nameof(ArbitraryArguments));
                 }
             }
         }

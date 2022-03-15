@@ -28,6 +28,7 @@ namespace VRCLauncher.Model
         public string MidiDevice { get; set; }
         public string OSCPorts { get; set; }
         public string LaunchInstance { get; set; }
+        public string ArbitraryArguments { get; set; }
 
         public Config()
         {
@@ -48,6 +49,7 @@ namespace VRCLauncher.Model
             MidiDevice = "";
             OSCPorts = "";
             LaunchInstance = "";
+            ArbitraryArguments = "";
         }
 
         // ReSharper disable once IdentifierTypo
@@ -145,6 +147,11 @@ namespace VRCLauncher.Model
             if (OSCPorts != "") args.Add("-osc-ports=" + OSCPorts);
 
             if (LaunchInstance != "") args.Add(LaunchInstance);
+
+            if (ArbitraryArguments != "")
+            {
+                args.AddRange(ArbitraryArguments.Split(" "));
+            }
 
             return args;
         }
