@@ -122,13 +122,23 @@ namespace VRCLauncher.Model
 
             if (VerboseLogging) args.Add("--enable-verbose-logging");
 
-            args.Add("-screen-fullscreen " + (Fullscreen ? "1" : "0"));
+            args.Add("-screen-fullscreen");
+            args.Add(Fullscreen ? "1" : "0");
 
-            if (Width != 0) args.Add("-screen-width " + Width);
+            if (Width != 0)
+            {
+                args.Add("-screen-width");
+                args.Add(Width.ToString());
+            }
 
-            if (Height != 0) args.Add("-screen-height " + Height);
+            if (Height != 0)
+            {
+                args.Add("-screen-height");
+                args.Add(Height.ToString());
+            }
 
-            args.Add("-monitor " + Monitor);
+            args.Add("-monitor");
+            args.Add(Monitor.ToString());
 
             if (MidiDevice != "") args.Add("-midi=" + MidiDevice);
 
