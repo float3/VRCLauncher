@@ -2,7 +2,7 @@
 using System.Windows;
 using VRCLauncher.Model;
 
-namespace VRCLauncher
+namespace VRCLauncher.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -11,13 +11,20 @@ namespace VRCLauncher
     {
         private ViewModel.ViewModel _viewModel = new();
 
-        public MainWindow()
+        public MainWindow(string[] args)
         {
             InitializeComponent();
             DataContext = _viewModel;
+
+            foreach (string arg in args)
+            {
+                if (arg.StartsWith("vrchat://")) _viewModel.LaunchInstance = arg;
+                if (arg == "--no-vr") _viewModel.NoVR = true;
+            }
+
             Application.Current.Exit += OnApplicationExit;
         }
-        
+
         private void OnApplicationExit(object sender, ExitEventArgs e)
         {
             _viewModel.Config.Save();
@@ -25,7 +32,12 @@ namespace VRCLauncher
 
         private void Launch(object sender, RoutedEventArgs e)
         {
-            Process.Start(Config.FindVRCexePath() + "\\VRChat.exe", _viewModel.Config.GetArgs());
+            Process process = new Process();
+            process.StartInfo.FileName = Config.FindVRCexePath() + "\\VRChat.exe";
+            process.StartInfo.WorkingDirectory = Config.FindVRCexePath();
+            string arguments = string.Join(" ", _viewModel.Config.GetArgs());
+            process.StartInfo.Arguments = arguments;
+            process.Start();
         }
     }
 }

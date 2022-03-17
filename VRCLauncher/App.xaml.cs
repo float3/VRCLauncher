@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace VRCLauncher
 {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
-	public partial class App : Application
-	{
-	}
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App
+    {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            View.MainWindow wnd = new View.MainWindow(e.Args);
+            wnd.Show();
+        }
+    }
 }
