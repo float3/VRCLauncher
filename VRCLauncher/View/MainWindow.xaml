@@ -247,7 +247,8 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Text="{Binding LaunchInstance}" Width="500" TextAlignment="Left"
+                    <Label Content="Launch Instance" Width="120" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding LaunchInstance}" Width="380" TextAlignment="Left"
                              HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
 
@@ -287,9 +288,10 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Text="{Binding ArbitraryArguments}" Width="500" TextAlignment="Left"
+                    <Label Content="Additional Args" Width="120" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding ArbitraryArguments}" Width="380" TextAlignment="Left"
                              HorizontalContentAlignment="Center"
-                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5,0,0">
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
 
                         <TextBox.Resources>
                             <VisualBrush
@@ -301,7 +303,7 @@
                                     <TextBlock
                                         FontStyle="Italic"
                                         Foreground="#959595"
-                                        Text="--space-for-arbitrary-arguments --seperate-with-space" />
+                                        Text="--space-for-arbitrary-arguments;--seperate-with-semicolon" />
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </TextBox.Resources>
