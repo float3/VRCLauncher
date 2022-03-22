@@ -1,31 +1,53 @@
 ﻿using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using VRCLauncher.Model;
 
-namespace VRCLauncher
+namespace VRCLauncher.View;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow
+    private ViewModel.ViewModel _viewModel = new();
+
+    public MainWindow(string[] args)
     {
-        private ViewModel.ViewModel _viewModel = new();
+        InitializeComponent();
+        DataContext = _viewModel;
 
-        public MainWindow()
+        foreach (string arg in args)
         {
-            InitializeComponent();
-            DataContext = _viewModel;
-            Application.Current.Exit += OnApplicationExit;
-        }
-        
-        private void OnApplicationExit(object sender, ExitEventArgs e)
-        {
-            _viewModel.Config.Save();
+            if (arg.StartsWith("vrchat://")) _viewModel.LaunchInstance = arg;
+            if (arg == "--no-vr") _viewModel.NoVR = true;
         }
 
-        private void Launch(object sender, RoutedEventArgs e)
+        Application.Current.Exit += OnApplicationExit;
+    }
+
+    private void OnApplicationExit(object sender, ExitEventArgs e)
+    {
+        _viewModel.Config.Save();
+    }
+
+    private void Launch(object sender, RoutedEventArgs e)
+    {
+        Process process = new Process();
+        process.StartInfo.FileName = Config.FindVRCexePath() + "\\VRChat.exe";
+        process.StartInfo.WorkingDirectory = Config.FindVRCexePath();
+        string arguments = string.Join(" ", _viewModel.Config.GetArgs());
+        process.StartInfo.Arguments = arguments;
+        process.Start();
+    }
+
+    private void ValidateFloatTextBox(object sender, TextCompositionEventArgs e)
+    {
+        if (sender is TextBox)
         {
-            Process.Start(Config.FindVRCexePath() + "\\VRChat.exe", _viewModel.Config.GetArgs());
+            string text = (sender as TextBox).Text + e.Text;
+            e.Handled = !float.TryParse(text, out _) || text.Contains(",");
         }
     }
 }

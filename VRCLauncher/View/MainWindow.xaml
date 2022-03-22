@@ -1,10 +1,10 @@
-﻿<Window x:Class="VRCLauncher.MainWindow"
+﻿<Window x:Class="VRCLauncher.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="VRCLauncher" Height="525" Width="700">
+        Title="VRCLauncher" Height="560" Width="700">
     <Window.Resources>
         <Style TargetType="{x:Type CheckBox}">
             <Setter Property="Width" Value="15" />
@@ -42,7 +42,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="-profile=" />
+                    <Label Content="--profile=" />
                     <TextBox Text="{Binding Profile}" Width="25" TextAlignment="Center"
                              HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -205,7 +205,50 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Text="{Binding LaunchInstance}" Width="500" TextAlignment="Left"
+                    <Label Content="--custom-arm-ratio=" Width="120" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding CustomArmRatio}" Width="380" TextAlignment="Left"
+                             HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"
+                             PreviewTextInput="ValidateFloatTextBox">
+                        
+                        <TextBox.Resources>
+                            <VisualBrush
+                                x:Key="Watermark"
+                                AlignmentX="Left"
+                                Stretch="None"
+                                TileMode="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock
+                                        FontStyle="Italic"
+                                        Foreground="#959595"
+                                        Text="0.4537 (default) 0.415 (previous beta) (this only works on the IK Beta)" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </TextBox.Resources>
+
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="">
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
+                                    </Trigger>
+
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Launch Instance" Width="120" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding LaunchInstance}" Width="380" TextAlignment="Left"
                              HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
 
@@ -245,9 +288,10 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Text="{Binding ArbitraryArguments}" Width="500" TextAlignment="Left"
+                    <Label Content="Additional Args" Width="120" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding ArbitraryArguments}" Width="380" TextAlignment="Left"
                              HorizontalContentAlignment="Center"
-                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5,0,0">
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
 
                         <TextBox.Resources>
                             <VisualBrush
@@ -259,7 +303,7 @@
                                     <TextBlock
                                         FontStyle="Italic"
                                         Foreground="#959595"
-                                        Text="--space-for-arbitrary-arguments --seperate-with-space" />
+                                        Text="--space-for-arbitrary-arguments;--seperate-with-semicolon" />
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </TextBox.Resources>

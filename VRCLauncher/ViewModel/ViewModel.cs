@@ -3,347 +3,364 @@ using System.Runtime.CompilerServices;
 using VRCLauncher.Annotations;
 using VRCLauncher.Model;
 
-namespace VRCLauncher.ViewModel
+namespace VRCLauncher.ViewModel;
+
+public class ViewModel : INotifyPropertyChanged
 {
-    public class ViewModel : INotifyPropertyChanged
+    public Config Config { get; set; }
+
+    public ViewModel()
     {
-        public Config Config { get; set; }
+        Config = Config.Load();
+        _noVR = NoVR;
+        _fps = FPS;
+        _legacyFBTCalibrate = LegacyFBTCalibrate;
+        _profile = Profile;
+        _watchWorlds = WatchWorlds;
+        _watchAvatars = WatchAvatars;
+        _fullscreen = Fullscreen;
+        _width = Width;
+        _height = Height;
+        _monitor = Monitor;
+        _udonDebugLogging = UdonDebugLogging;
+        _debugGUI = DebugGUI;
+        _sdkLogLevels = SDKLogLevels;
+        _verboseLogging = VerboseLogging;
+        _midiDevice = MidiDevice;
+        _oscPorts = OSCPorts;
+        _customArmRatio = CustomArmRatio;
+        _launchInstance = LaunchInstance;
+        _arbitraryArguments = ArbitraryArguments;
+    }
 
-        public ViewModel()
+    private bool _noVR;
+
+    public bool NoVR
+    {
+        get => Config.NoVR;
+        set
         {
-            Config = Config.Load();
-            _noVR = NoVR;
-            _fps = FPS;
-            _legacyFBTCalibrate = LegacyFBTCalibrate;
-            _profile = Profile;
-            _watchWorlds = WatchWorlds;
-            _watchAvatars = WatchAvatars;
-            _fullscreen = Fullscreen;
-            _width = Width;
-            _height = Height;
-            _monitor = Monitor;
-            _udonDebugLogging = UdonDebugLogging;
-            _debugGUI = DebugGUI;
-            _sdkLogLevels = SDKLogLevels;
-            _verboseLogging = VerboseLogging;
-            _midiDevice = MidiDevice;
-            _oscPorts = OSCPorts;
-            _launchInstance = LaunchInstance;
-            _arbitraryArguments = ArbitraryArguments;
-        }
-
-        private bool _noVR;
-
-        public bool NoVR
-        {
-            get => Config.NoVR;
-            set
+            if (_noVR != value)
             {
-                if (_noVR != value)
-                {
-                    _noVR = value;
-                    Config.NoVR = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(NoVR));
-                }
+                _noVR = value;
+                Config.NoVR = value;
+                Config.Save();
+                OnPropertyChanged(nameof(NoVR));
             }
         }
+    }
 
-        private int _fps;
+    private int _fps;
 
-        public int FPS
+    public int FPS
+    {
+        get => Config.FPS;
+        set
         {
-            get => Config.FPS;
-            set
+            if (_fps != value)
             {
-                if (_fps != value)
-                {
-                    _fps = value;
-                    Config.FPS = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(FPS));
-                }
+                _fps = value;
+                Config.FPS = value;
+                Config.Save();
+                OnPropertyChanged(nameof(FPS));
             }
         }
+    }
 
-        private bool _legacyFBTCalibrate;
+    private bool _legacyFBTCalibrate;
 
-        public bool LegacyFBTCalibrate
+    public bool LegacyFBTCalibrate
+    {
+        get => Config.LegacyFBTCalibrate;
+        set
         {
-            get => Config.LegacyFBTCalibrate;
-            set
+            if (_legacyFBTCalibrate != value)
             {
-                if (_legacyFBTCalibrate != value)
-                {
-                    _legacyFBTCalibrate = value;
-                    Config.LegacyFBTCalibrate = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(LegacyFBTCalibrate));
-                }
+                _legacyFBTCalibrate = value;
+                Config.LegacyFBTCalibrate = value;
+                Config.Save();
+                OnPropertyChanged(nameof(LegacyFBTCalibrate));
             }
         }
+    }
 
-        private int _profile;
+    private int _profile;
 
-        public int Profile
+    public int Profile
+    {
+        get => Config.Profile;
+        set
         {
-            get => Config.Profile;
-            set
+            if (_profile != value)
             {
-                if (_profile != value)
-                {
-                    _profile = value;
-                    Config.Profile = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(Profile));
-                }
+                _profile = value;
+                Config.Profile = value;
+                Config.Save();
+                OnPropertyChanged(nameof(Profile));
             }
         }
+    }
 
-        private bool _watchWorlds;
+    private bool _watchWorlds;
 
-        public bool WatchWorlds
+    public bool WatchWorlds
+    {
+        get => Config.WatchWorlds;
+        set
         {
-            get => Config.WatchWorlds;
-            set
+            if (_watchWorlds != value)
             {
-                if (_watchWorlds != value)
-                {
-                    _watchWorlds = value;
-                    Config.WatchWorlds = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(WatchWorlds));
-                }
+                _watchWorlds = value;
+                Config.WatchWorlds = value;
+                Config.Save();
+                OnPropertyChanged(nameof(WatchWorlds));
             }
         }
+    }
 
-        private bool _watchAvatars;
+    private bool _watchAvatars;
 
-        public bool WatchAvatars
+    public bool WatchAvatars
+    {
+        get => Config.WatchAvatars;
+        set
         {
-            get => Config.WatchAvatars;
-            set
+            if (_watchAvatars != value)
             {
-                if (_watchAvatars != value)
-                {
-                    _watchAvatars = value;
-                    Config.WatchAvatars = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(WatchAvatars));
-                }
+                _watchAvatars = value;
+                Config.WatchAvatars = value;
+                Config.Save();
+                OnPropertyChanged(nameof(WatchAvatars));
             }
         }
+    }
 
-        private bool _fullscreen;
+    private bool _fullscreen;
 
-        public bool Fullscreen
+    public bool Fullscreen
+    {
+        get => Config.Fullscreen;
+        set
         {
-            get => Config.Fullscreen;
-            set
+            if (_fullscreen != value)
             {
-                if (_fullscreen != value)
-                {
-                    _fullscreen = value;
-                    Config.Fullscreen = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(Fullscreen));
-                }
+                _fullscreen = value;
+                Config.Fullscreen = value;
+                Config.Save();
+                OnPropertyChanged(nameof(Fullscreen));
             }
         }
+    }
 
-        private int _height;
+    private int _height;
 
-        public int Height
+    public int Height
+    {
+        get => Config.Height;
+        set
         {
-            get => Config.Height;
-            set
+            if (_height != value)
             {
-                if (_height != value)
-                {
-                    _height = value;
-                    Config.Height = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(Height));
-                }
+                _height = value;
+                Config.Height = value;
+                Config.Save();
+                OnPropertyChanged(nameof(Height));
             }
         }
+    }
 
-        private int _width;
+    private int _width;
 
-        public int Width
+    public int Width
+    {
+        get => Config.Width;
+        set
         {
-            get => Config.Width;
-            set
+            if (_width != value)
             {
-                if (_width != value)
-                {
-                    _width = value;
-                    Config.Width = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(Width));
-                }
+                _width = value;
+                Config.Width = value;
+                Config.Save();
+                OnPropertyChanged(nameof(Width));
             }
         }
+    }
 
-        private int _monitor;
+    private int _monitor;
 
-        public int Monitor
+    public int Monitor
+    {
+        get => Config.Monitor;
+        set
         {
-            get => Config.Monitor;
-            set
+            if (_monitor != value)
             {
-                if (_monitor != value)
-                {
-                    _monitor = value;
-                    Config.Monitor = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(Monitor));
-                }
+                _monitor = value;
+                Config.Monitor = value;
+                Config.Save();
+                OnPropertyChanged(nameof(Monitor));
             }
         }
+    }
 
-        private bool _udonDebugLogging;
+    private bool _udonDebugLogging;
 
-        public bool UdonDebugLogging
+    public bool UdonDebugLogging
+    {
+        get => Config.UdonDebugLogging;
+        set
         {
-            get => Config.UdonDebugLogging;
-            set
+            if (_udonDebugLogging != value)
             {
-                if (_udonDebugLogging != value)
-                {
-                    _udonDebugLogging = value;
-                    Config.UdonDebugLogging = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(UdonDebugLogging));
-                }
+                _udonDebugLogging = value;
+                Config.UdonDebugLogging = value;
+                Config.Save();
+                OnPropertyChanged(nameof(UdonDebugLogging));
             }
         }
+    }
 
-        private bool _debugGUI;
+    private bool _debugGUI;
 
-        public bool DebugGUI
+    public bool DebugGUI
+    {
+        get => Config.DebugGUI;
+        set
         {
-            get => Config.DebugGUI;
-            set
+            if (_debugGUI != value)
             {
-                if (_debugGUI != value)
-                {
-                    _debugGUI = value;
-                    Config.DebugGUI = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(DebugGUI));
-                }
+                _debugGUI = value;
+                Config.DebugGUI = value;
+                Config.Save();
+                OnPropertyChanged(nameof(DebugGUI));
             }
         }
+    }
 
-        private bool _sdkLogLevels;
+    private bool _sdkLogLevels;
 
-        public bool SDKLogLevels
+    public bool SDKLogLevels
+    {
+        get => Config.SDKLogLevels;
+        set
         {
-            get => Config.SDKLogLevels;
-            set
+            if (_sdkLogLevels != value)
             {
-                if (_sdkLogLevels != value)
-                {
-                    _sdkLogLevels = value;
-                    Config.SDKLogLevels = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(VerboseLogging));
-                }
+                _sdkLogLevels = value;
+                Config.SDKLogLevels = value;
+                Config.Save();
+                OnPropertyChanged(nameof(VerboseLogging));
             }
         }
+    }
 
-        private bool _verboseLogging;
+    private bool _verboseLogging;
 
-        public bool VerboseLogging
+    public bool VerboseLogging
+    {
+        get => Config.VerboseLogging;
+        set
         {
-            get => Config.VerboseLogging;
-            set
+            if (_verboseLogging != value)
             {
-                if (_verboseLogging != value)
-                {
-                    _verboseLogging = value;
-                    Config.VerboseLogging = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(VerboseLogging));
-                }
+                _verboseLogging = value;
+                Config.VerboseLogging = value;
+                Config.Save();
+                OnPropertyChanged(nameof(VerboseLogging));
             }
         }
+    }
 
-        private string _midiDevice;
+    private string _midiDevice;
 
-        public string MidiDevice
+    public string MidiDevice
+    {
+        get => Config.MidiDevice;
+        set
         {
-            get => Config.MidiDevice;
-            set
+            if (_midiDevice != value)
             {
-                if (_midiDevice != value)
-                {
-                    _midiDevice = value;
-                    Config.MidiDevice = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(MidiDevice));
-                }
+                _midiDevice = value;
+                Config.MidiDevice = value;
+                Config.Save();
+                OnPropertyChanged(nameof(MidiDevice));
             }
         }
+    }
 
-        private string _oscPorts;
+    private string _oscPorts;
 
-        public string OSCPorts
+    public string OSCPorts
+    {
+        get => Config.OSCPorts;
+        set
         {
-            get => Config.OSCPorts;
-            set
+            if (_oscPorts != value)
             {
-                if (_oscPorts != value)
-                {
-                    _oscPorts = value;
-                    Config.OSCPorts = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(OSCPorts));
-                }
+                _oscPorts = value;
+                Config.OSCPorts = value;
+                Config.Save();
+                OnPropertyChanged(nameof(OSCPorts));
             }
         }
+    }
+    
+    private string _customArmRatio;
 
-        private string _launchInstance;
-
-        public string LaunchInstance
+    public string CustomArmRatio
+    {
+        get => Config.CustomArmRatio;
+        set
         {
-            get => Config.LaunchInstance;
-            set
+            if (_customArmRatio != value)
             {
-                if (_launchInstance != value)
-                {
-                    _launchInstance = value;
-                    Config.LaunchInstance = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(LaunchInstance));
-                }
+                _customArmRatio = value;
+                Config.CustomArmRatio = value;
+                Config.Save();
+                OnPropertyChanged(nameof(CustomArmRatio));
             }
         }
+    }
+
+    private string _launchInstance;
+
+    public string LaunchInstance
+    {
+        get => Config.LaunchInstance;
+        set
+        {
+            if (_launchInstance != value)
+            {
+                _launchInstance = value;
+                Config.LaunchInstance = value;
+                Config.Save();
+                OnPropertyChanged(nameof(LaunchInstance));
+            }
+        }
+    }
         
-        private string _arbitraryArguments;
+    private string _arbitraryArguments;
         
-        public string ArbitraryArguments
+    public string ArbitraryArguments
+    {
+        get => Config.ArbitraryArguments;
+        set
         {
-            get => Config.ArbitraryArguments;
-            set
+            if (_arbitraryArguments != value)
             {
-                if (_arbitraryArguments != value)
-                {
-                    _arbitraryArguments = value;
-                    Config.ArbitraryArguments = value;
-                    Config.Save();
-                    OnPropertyChanged(nameof(ArbitraryArguments));
-                }
+                _arbitraryArguments = value;
+                Config.ArbitraryArguments = value;
+                Config.Save();
+                OnPropertyChanged(nameof(ArbitraryArguments));
             }
         }
+    }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+    [NotifyPropertyChangedInvocator]
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
