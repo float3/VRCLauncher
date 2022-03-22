@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="VRCLauncher" Height="525" Width="700">
+        Title="VRCLauncher" Height="560" Width="700">
     <Window.Resources>
         <Style TargetType="{x:Type CheckBox}">
             <Setter Property="Width" Value="15" />
@@ -180,6 +180,48 @@
                                         FontStyle="Italic"
                                         Foreground="#959595"
                                         Text="9000:127.0.0.1:9001 (inPort:senderIP:outPort)" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </TextBox.Resources>
+
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="">
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
+                                    </Trigger>
+
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--custom-arm-ratio=" Width="120" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding CustomArmRatio}" Width="380" TextAlignment="Left"
+                             HorizontalContentAlignment="Center"
+                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"
+                             PreviewTextInput="ValidateFloatTextBox">
+                        
+                        <TextBox.Resources>
+                            <VisualBrush
+                                x:Key="Watermark"
+                                AlignmentX="Left"
+                                Stretch="None"
+                                TileMode="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock
+                                        FontStyle="Italic"
+                                        Foreground="#959595"
+                                        Text="0.4537 (default) 0.415 (previous beta) (this only works on the IK Beta)" />
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </TextBox.Resources>

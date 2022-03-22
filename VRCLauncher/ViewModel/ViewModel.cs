@@ -28,6 +28,7 @@ public class ViewModel : INotifyPropertyChanged
         _verboseLogging = VerboseLogging;
         _midiDevice = MidiDevice;
         _oscPorts = OSCPorts;
+        _customArmRatio = CustomArmRatio;
         _launchInstance = LaunchInstance;
         _arbitraryArguments = ArbitraryArguments;
     }
@@ -300,6 +301,23 @@ public class ViewModel : INotifyPropertyChanged
                 Config.OSCPorts = value;
                 Config.Save();
                 OnPropertyChanged(nameof(OSCPorts));
+            }
+        }
+    }
+    
+    private string _customArmRatio;
+
+    public string CustomArmRatio
+    {
+        get => Config.CustomArmRatio;
+        set
+        {
+            if (_customArmRatio != value)
+            {
+                _customArmRatio = value;
+                Config.CustomArmRatio = value;
+                Config.Save();
+                OnPropertyChanged(nameof(CustomArmRatio));
             }
         }
     }

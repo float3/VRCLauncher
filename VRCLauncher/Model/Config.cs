@@ -27,6 +27,7 @@ public class Config
     public bool VerboseLogging { get; set; }
     public string MidiDevice { get; set; }
     public string OSCPorts { get; set; }
+    public string CustomArmRatio { get; set; }
     public string LaunchInstance { get; set; }
     public string ArbitraryArguments { get; set; }
 
@@ -47,6 +48,7 @@ public class Config
         SDKLogLevels = false;
         VerboseLogging = false;
         MidiDevice = "";
+        CustomArmRatio = "0.4537";
         OSCPorts = "";
         LaunchInstance = "";
         ArbitraryArguments = "";

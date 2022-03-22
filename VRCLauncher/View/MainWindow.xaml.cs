@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using VRCLauncher.Model;
 
 namespace VRCLauncher.View;
@@ -38,5 +40,14 @@ public partial class MainWindow
         string arguments = string.Join(" ", _viewModel.Config.GetArgs());
         process.StartInfo.Arguments = arguments;
         process.Start();
+    }
+
+    private void ValidateFloatTextBox(object sender, TextCompositionEventArgs e)
+    {
+        if (sender is TextBox)
+        {
+            string text = (sender as TextBox).Text + e.Text;
+            e.Handled = !float.TryParse(text, out _) || text.Contains(",");
+        }
     }
 }
