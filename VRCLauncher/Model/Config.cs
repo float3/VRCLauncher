@@ -110,7 +110,7 @@ public class Config
 
         if (LegacyFBTCalibrate) args.Add("--legacy-fbt-calibrate");
 
-        args.Add("-profile=" + Profile);
+        args.Add("--profile=" + Profile);
 
         if (WatchWorlds) args.Add("--watch-worlds");
 
@@ -142,15 +142,15 @@ public class Config
         args.Add("-monitor");
         args.Add(Monitor.ToString());
 
-        if (MidiDevice != "") args.Add("-midi=" + MidiDevice);
+        if (MidiDevice != "") args.Add("--midi=" + MidiDevice);
 
-        if (OSCPorts != "") args.Add("-osc-ports=" + OSCPorts);
+        if (OSCPorts != "") args.Add("--osc-ports=" + OSCPorts);
 
         if (LaunchInstance != "") args.Add(LaunchInstance);
 
         if (ArbitraryArguments != "")
         {
-            args.AddRange(ArbitraryArguments.Split(" "));
+            args.AddRange(ArbitraryArguments.Split(";"));
         }
 
         return args;

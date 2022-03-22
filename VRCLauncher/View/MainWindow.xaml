@@ -42,7 +42,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="-profile=" />
+                    <Label Content="--profile=" />
                     <TextBox Text="{Binding Profile}" Width="25" TextAlignment="Center"
                              HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center" VerticalAlignment="Center" />
