@@ -28,6 +28,7 @@ public class Config
     public string MidiDevice { get; set; }
     public string OSCPorts { get; set; }
     public string CustomArmRatio { get; set; }
+    public bool DisableShoulderTracking { get; set; }
     public string LaunchInstance { get; set; }
     public string ArbitraryArguments { get; set; }
 
@@ -49,6 +50,7 @@ public class Config
         VerboseLogging = false;
         MidiDevice = "";
         CustomArmRatio = "0.4537";
+        DisableShoulderTracking = false;
         OSCPorts = "";
         LaunchInstance = "";
         ArbitraryArguments = "";
@@ -147,6 +149,10 @@ public class Config
         if (MidiDevice != "") args.Add("--midi=" + MidiDevice);
 
         if (OSCPorts != "") args.Add("--osc-ports=" + OSCPorts);
+        
+        if(CustomArmRatio != "") args.Add("--custom-arm-ratio=" + CustomArmRatio);
+        
+        if(DisableShoulderTracking) args.Add("--disable-shoulder-tracking");
 
         if (LaunchInstance != "") args.Add(LaunchInstance);
 
