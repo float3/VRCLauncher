@@ -29,6 +29,7 @@ public class ViewModel : INotifyPropertyChanged
         _midiDevice = MidiDevice;
         _oscPorts = OSCPorts;
         _customArmRatio = CustomArmRatio;
+        _disableShoulderTracking = DisableShoulderTracking;
         _launchInstance = LaunchInstance;
         _arbitraryArguments = ArbitraryArguments;
     }
@@ -318,6 +319,23 @@ public class ViewModel : INotifyPropertyChanged
                 Config.CustomArmRatio = value;
                 Config.Save();
                 OnPropertyChanged(nameof(CustomArmRatio));
+            }
+        }
+    }
+    
+    private bool _disableShoulderTracking;
+
+    public bool DisableShoulderTracking
+    {
+        get => Config.DisableShoulderTracking;
+        set
+        {
+            if (_disableShoulderTracking != value)
+            {
+                _disableShoulderTracking = value;
+                Config.DisableShoulderTracking = value;
+                Config.Save();
+                OnPropertyChanged(nameof(DisableShoulderTracking));
             }
         }
     }
