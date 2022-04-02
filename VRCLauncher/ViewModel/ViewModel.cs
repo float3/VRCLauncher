@@ -12,26 +12,26 @@ public class ViewModel : INotifyPropertyChanged
     public ViewModel()
     {
         Config = Config.Load();
-        _noVR = NoVR;
-        _fps = FPS;
-        _legacyFBTCalibrate = LegacyFBTCalibrate;
-        _profile = Profile;
-        _watchWorlds = WatchWorlds;
-        _watchAvatars = WatchAvatars;
-        _fullscreen = Fullscreen;
-        _width = Width;
-        _height = Height;
-        _monitor = Monitor;
-        _udonDebugLogging = UdonDebugLogging;
-        _debugGUI = DebugGUI;
-        _sdkLogLevels = SDKLogLevels;
-        _verboseLogging = VerboseLogging;
-        _midiDevice = MidiDevice;
-        _oscPorts = OSCPorts;
-        _customArmRatio = CustomArmRatio;
-        _disableShoulderTracking = DisableShoulderTracking;
-        _launchInstance = LaunchInstance;
-        _arbitraryArguments = ArbitraryArguments;
+        _noVR = Config.NoVR;
+        _fps = Config.FPS;
+        _legacyFBTCalibrate = Config.LegacyFBTCalibrate;
+        _profile = Config.Profile;
+        _watchWorlds = Config.WatchWorlds;
+        _watchAvatars = Config.WatchAvatars;
+        _fullscreen = Config.Fullscreen;
+        _width = Config.Width;
+        _height = Config.Height;
+        _monitor = Config.Monitor;
+        _udonDebugLogging = Config.UdonDebugLogging;
+        _debugGUI = Config.DebugGUI;
+        _sdkLogLevels = Config.SDKLogLevels;
+        _verboseLogging = Config.VerboseLogging;
+        _midiDevice = Config.MidiDevice;
+        _oscPorts = Config.OSCPorts;
+        _customArmRatio = Config.CustomArmRatio;
+        _disableShoulderTracking = Config.DisableShoulderTracking;
+        _launchInstance = Config.LaunchInstance;
+        _arbitraryArguments = Config.ArbitraryArguments;
     }
 
     private bool _noVR;
