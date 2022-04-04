@@ -93,6 +93,7 @@ public class Config
             try
             {
                 config = JsonSerializer.Deserialize<Config>(json)!;
+                config.LaunchInstance = "";
             }
             catch (Exception e)
             {

@@ -349,8 +349,15 @@ public class ViewModel : INotifyPropertyChanged
         {
             if (_launchInstance != value)
             {
-                _launchInstance = value;
-                Config.LaunchInstance = value;
+                string instance = value;
+                if (instance.StartsWith("https://vrchat.com/home/launch?worldId="))
+                {
+                    instance = instance.Replace("https://vrchat.com/home/launch?worldId=", "vrchat://launch?id=");
+                    instance = instance.Replace("&instanceId=", ":");
+                }
+
+                _launchInstance = instance;
+                Config.LaunchInstance = instance;
                 Config.Save();
                 OnPropertyChanged(nameof(LaunchInstance));
             }
