@@ -3,12 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Title="VRCLauncher" Height="550" Width="900">
+        mc:Ignorable="d" SizeToContent="WidthAndHeight"
+        Title="VRCLauncher" Height="550" Width="900"
+        Style="{DynamicResource WindowStyle}">
     <Window.Resources>
         <Style TargetType="{x:Type CheckBox}">
             <Setter Property="Width" Value="15" />
             <Setter Property="Height" Value="15" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+            <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource TextBackgroundColorBrush}" />
+        </Style>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+            <Setter Property="Background" Value="{StaticResource WindowBackgroundColorBrush}" />
         </Style>
     </Window.Resources>
     <Grid>
@@ -119,7 +132,7 @@
         <GroupBox Header="IK" Margin="10" Padding="10" Grid.Row="1" Grid.Column="1">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--legacy-fbt-calibrate" Width="185.5"/>
+                    <Label Content="--legacy-fbt-calibrate" Width="185.5" />
                     <CheckBox IsChecked="{Binding LegacyFBTCalibrate}" />
                 </StackPanel>
 
@@ -149,9 +162,12 @@
 
                                 <TextBox.Style>
                                     <Style TargetType="TextBox">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left" />
                                         <Setter Property="VerticalAlignment" Value="Center" />
-                                        <Setter Property="FontSize" Value="12" />
-                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+                                        <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+                                        <Setter Property="BorderBrush"
+                                                Value="{StaticResource TextBackgroundColorBrush}" />
                                         <Style.Triggers>
                                             <Trigger Property="Text" Value="">
                                                 <Setter Property="Background" Value="{StaticResource Watermark}" />
@@ -201,9 +217,11 @@
 
                         <TextBox.Style>
                             <Style TargetType="TextBox">
+                                <Setter Property="HorizontalContentAlignment" Value="Left" />
                                 <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="FontSize" Value="12" />
-                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+                                <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource TextBackgroundColorBrush}" />
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="">
                                         <Setter Property="Background" Value="{StaticResource Watermark}" />
@@ -242,9 +260,11 @@
 
                         <TextBox.Style>
                             <Style TargetType="TextBox">
+                                <Setter Property="HorizontalContentAlignment" Value="Left" />
                                 <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="FontSize" Value="12" />
-                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+                                <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource TextBackgroundColorBrush}" />
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="">
                                         <Setter Property="Background" Value="{StaticResource Watermark}" />
@@ -283,9 +303,11 @@
 
                         <TextBox.Style>
                             <Style TargetType="TextBox">
+                                <Setter Property="HorizontalContentAlignment" Value="Left" />
                                 <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="FontSize" Value="12" />
-                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+                                <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource TextBackgroundColorBrush}" />
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="">
                                         <Setter Property="Background" Value="{StaticResource Watermark}" />
@@ -324,9 +346,11 @@
 
                         <TextBox.Style>
                             <Style TargetType="TextBox">
+                                <Setter Property="HorizontalContentAlignment" Value="Left" />
                                 <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="FontSize" Value="12" />
-                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+                                <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource TextBackgroundColorBrush}" />
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="">
                                         <Setter Property="Background" Value="{StaticResource Watermark}" />
@@ -345,6 +369,7 @@
             </StackPanel>
         </GroupBox>
 
-        <Button Content="Launch" Margin="10" Padding="10" Grid.Row="1" Grid.Column="2" Click="Launch" />
+        <Button Style="{DynamicResource ButtonStyle}" Content="Launch" Margin="10" Padding="10" Grid.Row="1"
+                Grid.Column="2" Click="Launch" />
     </Grid>
 </Window>
