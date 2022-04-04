@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="VRCLauncher" Height="600" Width="900">
+        Title="VRCLauncher" Height="550" Width="900">
     <Window.Resources>
         <Style TargetType="{x:Type CheckBox}">
             <Setter Property="Width" Value="15" />
@@ -95,22 +95,22 @@
         <GroupBox Header="Logging" Margin="10" Padding="10" Grid.Row="1" Grid.Column="0">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--enable-udon-debug-logging" />
+                    <Label Content="--enable-udon-debug-logging" Width="175" />
                     <CheckBox IsChecked="{Binding UdonDebugLogging}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--enable-debug-gui" />
+                    <Label Content="--enable-debug-gui" Width="175" />
                     <CheckBox IsChecked="{Binding DebugGUI}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--enable-sdk-log-levels" />
+                    <Label Content="--enable-sdk-log-levels" Width="175" />
                     <CheckBox IsChecked="{Binding SDKLogLevels}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--enable-verbose-logging" />
+                    <Label Content="--enable-verbose-logging" Width="175" />
                     <CheckBox IsChecked="{Binding VerboseLogging}" />
                 </StackPanel>
             </StackPanel>
@@ -119,7 +119,7 @@
         <GroupBox Header="IK" Margin="10" Padding="10" Grid.Row="1" Grid.Column="1">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--legacy-fbt-calibrate" />
+                    <Label Content="--legacy-fbt-calibrate" Width="185.5"/>
                     <CheckBox IsChecked="{Binding LegacyFBTCalibrate}" />
                 </StackPanel>
 
