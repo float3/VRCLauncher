@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,15 +14,18 @@ public partial class MainWindow
 {
     private ViewModel.ViewModel _viewModel = new();
 
-    public MainWindow(string[] args)
+    public MainWindow()
     {
         InitializeComponent();
         DataContext = _viewModel;
 
-        foreach (string arg in args)
+        if (Environment.GetCommandLineArgs().Length > 0)
         {
-            if (arg.StartsWith("vrchat://")) _viewModel.LaunchInstance = arg;
-            if (arg == "--no-vr") _viewModel.NoVR = true;
+            foreach (string arg in Environment.GetCommandLineArgs())
+            {
+                if (arg.StartsWith("vrchat://")) _viewModel.LaunchInstance = arg;
+                if (arg == "--no-vr") _viewModel.NoVR = true;
+            }
         }
 
         Application.Current.Exit += OnApplicationExit;
