@@ -12,27 +12,34 @@ public class ViewModel : INotifyPropertyChanged
     public ViewModel()
     {
         Config = Config.Load();
-        _noVR = Config.NoVR;
-        _fps = Config.FPS;
-        _legacyFBTCalibrate = Config.LegacyFBTCalibrate;
-        _profile = Config.Profile;
-        _watchWorlds = Config.WatchWorlds;
-        _watchAvatars = Config.WatchAvatars;
-        _fullscreen = Config.Fullscreen;
-        _width = Config.Width;
-        _height = Config.Height;
-        _monitor = Config.Monitor;
-        _udonDebugLogging = Config.UdonDebugLogging;
-        _debugGUI = Config.DebugGUI;
-        _sdkLogLevels = Config.SDKLogLevels;
-        _verboseLogging = Config.VerboseLogging;
-        _midiDevice = Config.MidiDevice;
-        _oscPorts = Config.OSCPorts;
-        _customArmRatio = Config.CustomArmRatio;
-        _disableShoulderTracking = Config.DisableShoulderTracking;
-        _launchInstance = Config.LaunchInstance;
-        _arbitraryArguments = Config.ArbitraryArguments;
+        NoVR = Config.NoVR;
+        FPS = Config.FPS;
+        Profile = Config.Profile;
+
+        WatchWorlds = Config.WatchWorlds;
+        WatchAvatars = Config.WatchAvatars;
+
+        Fullscreen = Config.Fullscreen;
+        Width = Config.Width;
+        Height = Config.Height;
+        Monitor = Config.Monitor;
+
+        UdonDebugLogging = Config.UdonDebugLogging;
+        DebugGUI = Config.DebugGUI;
+        SDKLogLevels = Config.SDKLogLevels;
+        VerboseLogging = Config.VerboseLogging;
+
+        LegacyFBTCalibrate = Config.LegacyFBTCalibrate;
+        CustomArmRatio = Config.CustomArmRatio;
+        DisableShoulderTracking = Config.DisableShoulderTracking;
+
+        MidiDevice = Config.MidiDevice;
+        OSCPorts = Config.OSCPorts;
+        LaunchInstance = Config.LaunchInstance;
+        ArbitraryArguments = Config.ArbitraryArguments;
     }
+
+    #region Main
 
     private bool _noVR;
 
@@ -45,7 +52,6 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _noVR = value;
                 Config.NoVR = value;
-                Config.Save();
                 OnPropertyChanged(nameof(NoVR));
             }
         }
@@ -62,25 +68,7 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _fps = value;
                 Config.FPS = value;
-                Config.Save();
                 OnPropertyChanged(nameof(FPS));
-            }
-        }
-    }
-
-    private bool _legacyFBTCalibrate;
-
-    public bool LegacyFBTCalibrate
-    {
-        get => Config.LegacyFBTCalibrate;
-        set
-        {
-            if (_legacyFBTCalibrate != value)
-            {
-                _legacyFBTCalibrate = value;
-                Config.LegacyFBTCalibrate = value;
-                Config.Save();
-                OnPropertyChanged(nameof(LegacyFBTCalibrate));
             }
         }
     }
@@ -96,11 +84,14 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _profile = value;
                 Config.Profile = value;
-                Config.Save();
                 OnPropertyChanged(nameof(Profile));
             }
         }
     }
+
+    #endregion
+
+    #region Watchers
 
     private bool _watchWorlds;
 
@@ -113,7 +104,6 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _watchWorlds = value;
                 Config.WatchWorlds = value;
-                Config.Save();
                 OnPropertyChanged(nameof(WatchWorlds));
             }
         }
@@ -130,13 +120,16 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _watchAvatars = value;
                 Config.WatchAvatars = value;
-                Config.Save();
                 OnPropertyChanged(nameof(WatchAvatars));
             }
         }
     }
 
     private bool _fullscreen;
+
+    #endregion
+
+    #region Screen
 
     public bool Fullscreen
     {
@@ -147,7 +140,6 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _fullscreen = value;
                 Config.Fullscreen = value;
-                Config.Save();
                 OnPropertyChanged(nameof(Fullscreen));
             }
         }
@@ -164,7 +156,6 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _height = value;
                 Config.Height = value;
-                Config.Save();
                 OnPropertyChanged(nameof(Height));
             }
         }
@@ -181,7 +172,6 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _width = value;
                 Config.Width = value;
-                Config.Save();
                 OnPropertyChanged(nameof(Width));
             }
         }
@@ -198,11 +188,14 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _monitor = value;
                 Config.Monitor = value;
-                Config.Save();
                 OnPropertyChanged(nameof(Monitor));
             }
         }
     }
+
+    #endregion
+
+    #region Logging
 
     private bool _udonDebugLogging;
 
@@ -215,7 +208,6 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _udonDebugLogging = value;
                 Config.UdonDebugLogging = value;
-                Config.Save();
                 OnPropertyChanged(nameof(UdonDebugLogging));
             }
         }
@@ -232,7 +224,6 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _debugGUI = value;
                 Config.DebugGUI = value;
-                Config.Save();
                 OnPropertyChanged(nameof(DebugGUI));
             }
         }
@@ -249,7 +240,6 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _sdkLogLevels = value;
                 Config.SDKLogLevels = value;
-                Config.Save();
                 OnPropertyChanged(nameof(VerboseLogging));
             }
         }
@@ -266,11 +256,66 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _verboseLogging = value;
                 Config.VerboseLogging = value;
-                Config.Save();
                 OnPropertyChanged(nameof(VerboseLogging));
             }
         }
     }
+
+    #endregion
+
+    #region IK
+
+    private bool _legacyFBTCalibrate;
+
+    public bool LegacyFBTCalibrate
+    {
+        get => Config.LegacyFBTCalibrate;
+        set
+        {
+            if (_legacyFBTCalibrate != value)
+            {
+                _legacyFBTCalibrate = value;
+                Config.LegacyFBTCalibrate = value;
+                OnPropertyChanged(nameof(LegacyFBTCalibrate));
+            }
+        }
+    }
+
+    private string _customArmRatio;
+
+    public string CustomArmRatio
+    {
+        get => Config.CustomArmRatio;
+        set
+        {
+            if (_customArmRatio != value)
+            {
+                _customArmRatio = value;
+                Config.CustomArmRatio = value;
+                OnPropertyChanged(nameof(CustomArmRatio));
+            }
+        }
+    }
+
+    private bool _disableShoulderTracking;
+
+    public bool DisableShoulderTracking
+    {
+        get => Config.DisableShoulderTracking;
+        set
+        {
+            if (_disableShoulderTracking != value)
+            {
+                _disableShoulderTracking = value;
+                Config.DisableShoulderTracking = value;
+                OnPropertyChanged(nameof(DisableShoulderTracking));
+            }
+        }
+    }
+
+    #endregion
+
+    #region MISC
 
     private string _midiDevice;
 
@@ -283,7 +328,6 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _midiDevice = value;
                 Config.MidiDevice = value;
-                Config.Save();
                 OnPropertyChanged(nameof(MidiDevice));
             }
         }
@@ -300,42 +344,7 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _oscPorts = value;
                 Config.OSCPorts = value;
-                Config.Save();
                 OnPropertyChanged(nameof(OSCPorts));
-            }
-        }
-    }
-    
-    private string _customArmRatio;
-
-    public string CustomArmRatio
-    {
-        get => Config.CustomArmRatio;
-        set
-        {
-            if (_customArmRatio != value)
-            {
-                _customArmRatio = value;
-                Config.CustomArmRatio = value;
-                Config.Save();
-                OnPropertyChanged(nameof(CustomArmRatio));
-            }
-        }
-    }
-    
-    private bool _disableShoulderTracking;
-
-    public bool DisableShoulderTracking
-    {
-        get => Config.DisableShoulderTracking;
-        set
-        {
-            if (_disableShoulderTracking != value)
-            {
-                _disableShoulderTracking = value;
-                Config.DisableShoulderTracking = value;
-                Config.Save();
-                OnPropertyChanged(nameof(DisableShoulderTracking));
             }
         }
     }
@@ -349,16 +358,22 @@ public class ViewModel : INotifyPropertyChanged
         {
             if (_launchInstance != value)
             {
-                _launchInstance = value;
-                Config.LaunchInstance = value;
-                Config.Save();
+                string instance = value;
+                if (instance.StartsWith("https://vrchat.com/home/launch?worldId="))
+                {
+                    instance = instance.Replace("https://vrchat.com/home/launch?worldId=", "vrchat://launch?id=");
+                    instance = instance.Replace("&instanceId=", ":");
+                }
+
+                _launchInstance = instance;
+                Config.LaunchInstance = instance;
                 OnPropertyChanged(nameof(LaunchInstance));
             }
         }
     }
-        
+
     private string _arbitraryArguments;
-        
+
     public string ArbitraryArguments
     {
         get => Config.ArbitraryArguments;
@@ -368,16 +383,17 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _arbitraryArguments = value;
                 Config.ArbitraryArguments = value;
-                Config.Save();
                 OnPropertyChanged(nameof(ArbitraryArguments));
             }
         }
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+    #endregion
+
+    public event PropertyChangedEventHandler PropertyChanged;
 
     [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

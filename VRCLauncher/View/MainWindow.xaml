@@ -3,12 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Title="VRCLauncher" Height="600" Width="700">
+        mc:Ignorable="d" SizeToContent="WidthAndHeight"
+        Title="VRCLauncher" Height="550" Width="900"
+        Style="{DynamicResource WindowStyle}">
     <Window.Resources>
         <Style TargetType="{x:Type CheckBox}">
             <Setter Property="Width" Value="15" />
             <Setter Property="Height" Value="15" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+            <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource TextBackgroundColorBrush}" />
+        </Style>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+            <Setter Property="Background" Value="{StaticResource WindowBackgroundColorBrush}" />
         </Style>
     </Window.Resources>
     <Grid>
@@ -26,24 +39,20 @@
         <GroupBox Header="Main" Margin="10" Padding="10" Grid.Row="0" Grid.Column="0">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--no-vr" />
-                    <CheckBox IsChecked="{Binding NoVR}" />
+                    <Label Content="--no-vr" Width="100" />
+                    <CheckBox IsChecked="{Binding NoVR}" Width="20" Height="20" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--fps=" />
-                    <TextBox Text="{Binding FPS}" Width="25" TextAlignment="Center" HorizontalContentAlignment="Center"
+                    <Label Content="--fps=" Width="98" />
+                    <TextBox Text="{Binding FPS}" Width="20" Height="20" TextAlignment="Center"
+                             HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--legacy-fbt-calibrate" />
-                    <CheckBox IsChecked="{Binding LegacyFBTCalibrate}" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="--profile=" />
-                    <TextBox Text="{Binding Profile}" Width="25" TextAlignment="Center"
+                    <Label Content="--profile=" Width="98" />
+                    <TextBox Text="{Binding Profile}" Width="20" Height="20" TextAlignment="Center"
                              HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </StackPanel>
@@ -53,12 +62,12 @@
         <GroupBox Header="Watchers" Margin="10" Padding="10" Grid.Row="0" Grid.Column="1">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--watch-worlds" />
+                    <Label Content="--watch-worlds" Width="100" />
                     <CheckBox IsChecked="{Binding WatchWorlds}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--watch-avatars" />
+                    <Label Content="--watch-avatars" Width="100" />
                     <CheckBox IsChecked="{Binding WatchAvatars}" />
                 </StackPanel>
             </StackPanel>
@@ -69,62 +78,125 @@
                 <StackPanel Orientation="Horizontal">
                     <Label Content="-screen-fullscreen " Width="110" HorizontalContentAlignment="Left" />
                     <CheckBox IsChecked="{Binding Fullscreen}"
-                              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40,0,0,0" />
+                              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,0,0,0" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="-screen-width " Width="110" HorizontalContentAlignment="Left" />
                     <TextBox Text="{Binding Width}" Width="80" TextAlignment="Center"
                              HorizontalContentAlignment="Center"
-                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                             HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="-screen-heigth " Width="110" HorizontalContentAlignment="Left" />
                     <TextBox Text="{Binding Height}" Width="80" TextAlignment="Center"
                              HorizontalContentAlignment="Center"
-                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                             HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="-monitor " Width="110" HorizontalContentAlignment="Left" />
                     <TextBox Text="{Binding Monitor}" Width="80" TextAlignment="Center"
                              HorizontalContentAlignment="Center"
-                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" />
+                             HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </StackPanel>
 
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Header="Logging" Margin="10" Padding="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+        <GroupBox Header="Logging" Margin="10" Padding="10" Grid.Row="1" Grid.Column="0">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--enable-udon-debug-logging" />
+                    <Label Content="--enable-udon-debug-logging" Width="175" />
                     <CheckBox IsChecked="{Binding UdonDebugLogging}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--enable-debug-gui" />
+                    <Label Content="--enable-debug-gui" Width="175" />
                     <CheckBox IsChecked="{Binding DebugGUI}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--enable-sdk-log-levels" />
+                    <Label Content="--enable-sdk-log-levels" Width="175" />
                     <CheckBox IsChecked="{Binding SDKLogLevels}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--enable-verbose-logging" />
+                    <Label Content="--enable-verbose-logging" Width="175" />
                     <CheckBox IsChecked="{Binding VerboseLogging}" />
                 </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="IK" Margin="10" Padding="10" Grid.Row="1" Grid.Column="1">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="--legacy-fbt-calibrate" Width="185.5" />
+                    <CheckBox IsChecked="{Binding LegacyFBTCalibrate}" />
+                </StackPanel>
+
+                <GroupBox Header="IK Beta">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="--custom-arm-ratio=" Width="120" HorizontalContentAlignment="Left" />
+                            <TextBox Text="{Binding CustomArmRatio}" Width="200" TextAlignment="Left"
+                                     HorizontalContentAlignment="Center"
+                                     HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"
+                                     PreviewTextInput="ValidateFloatTextBox">
+
+                                <TextBox.Resources>
+                                    <VisualBrush
+                                        x:Key="Watermark"
+                                        AlignmentX="Left"
+                                        Stretch="None"
+                                        TileMode="None">
+                                        <VisualBrush.Visual>
+                                            <TextBlock
+                                                FontStyle="Italic"
+                                                Foreground="#959595"
+                                                Text="default: 0.4537, previous beta: 0.415" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </TextBox.Resources>
+
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+                                        <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+                                        <Setter Property="BorderBrush"
+                                                Value="{StaticResource TextBackgroundColorBrush}" />
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="">
+                                                <Setter Property="Background" Value="{StaticResource Watermark}" />
+                                            </Trigger>
+
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource Watermark}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+
+                            </TextBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="--disable-shoulder-tracking" Width="180" HorizontalContentAlignment="Left" />
+                            <CheckBox IsChecked="{Binding DisableShoulderTracking}" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
             </StackPanel>
         </GroupBox>
 
         <GroupBox Header="Misc" Margin="10" Padding="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--midi=" Width="50" HorizontalContentAlignment="Left" />
-                    <TextBox Text="{Binding MidiDevice}" Width="450" TextAlignment="Left"
+                    <Label Content="--midi=" Width="120" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding MidiDevice}" Width="700" TextAlignment="Left"
                              HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
 
@@ -145,9 +217,11 @@
 
                         <TextBox.Style>
                             <Style TargetType="TextBox">
+                                <Setter Property="HorizontalContentAlignment" Value="Left" />
                                 <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="FontSize" Value="12" />
-                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+                                <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource TextBackgroundColorBrush}" />
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="">
                                         <Setter Property="Background" Value="{StaticResource Watermark}" />
@@ -164,8 +238,8 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="--osc=" Width="50" HorizontalContentAlignment="Left" />
-                    <TextBox Text="{Binding OSCPorts}" Width="450" TextAlignment="Left"
+                    <Label Content="--osc=" Width="120" HorizontalContentAlignment="Left" />
+                    <TextBox Text="{Binding OSCPorts}" Width="700" TextAlignment="Left"
                              HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
 
@@ -186,9 +260,11 @@
 
                         <TextBox.Style>
                             <Style TargetType="TextBox">
+                                <Setter Property="HorizontalContentAlignment" Value="Left" />
                                 <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="FontSize" Value="12" />
-                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+                                <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource TextBackgroundColorBrush}" />
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="">
                                         <Setter Property="Background" Value="{StaticResource Watermark}" />
@@ -202,57 +278,11 @@
                         </TextBox.Style>
 
                     </TextBox>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="--custom-arm-ratio=" Width="120" HorizontalContentAlignment="Left" />
-                    <TextBox Text="{Binding CustomArmRatio}" Width="380" TextAlignment="Left"
-                             HorizontalContentAlignment="Center"
-                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"
-                             PreviewTextInput="ValidateFloatTextBox">
-
-                        <TextBox.Resources>
-                            <VisualBrush
-                                x:Key="Watermark"
-                                AlignmentX="Left"
-                                Stretch="None"
-                                TileMode="None">
-                                <VisualBrush.Visual>
-                                    <TextBlock
-                                        FontStyle="Italic"
-                                        Foreground="#959595"
-                                        Text="0.4537 (default) 0.415 (previous beta) (this only works on the IK Beta)" />
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </TextBox.Resources>
-
-                        <TextBox.Style>
-                            <Style TargetType="TextBox">
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="FontSize" Value="12" />
-                                <Setter Property="Background" Value="Transparent" />
-                                <Style.Triggers>
-                                    <Trigger Property="Text" Value="">
-                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
-                                    </Trigger>
-
-                                    <Trigger Property="Text" Value="{x:Null}">
-                                        <Setter Property="Background" Value="{StaticResource Watermark}" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBox.Style>
-
-                    </TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="--disable-shoulder-tracking" Width="180" HorizontalContentAlignment="Left" />
-                    <CheckBox IsChecked="{Binding DisableShoulderTracking}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Launch Instance" Width="120" HorizontalContentAlignment="Left" />
-                    <TextBox Text="{Binding LaunchInstance}" Width="380" TextAlignment="Left"
+                    <TextBox Text="{Binding LaunchInstance}" Width="700" TextAlignment="Left"
                              HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
 
@@ -266,16 +296,18 @@
                                     <TextBlock
                                         FontStyle="Italic"
                                         Foreground="#959595"
-                                        Text="vrchat://launch?ref=vrchat.com&amp;id=wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd:0" />
+                                        Text="vrchat://launch?id=wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd:0 or https://vrchat.com/home/launch?worldId=wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd&amp;instanceId=0 " />
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </TextBox.Resources>
 
                         <TextBox.Style>
                             <Style TargetType="TextBox">
+                                <Setter Property="HorizontalContentAlignment" Value="Left" />
                                 <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="FontSize" Value="12" />
-                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+                                <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource TextBackgroundColorBrush}" />
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="">
                                         <Setter Property="Background" Value="{StaticResource Watermark}" />
@@ -293,7 +325,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Additional Args" Width="120" HorizontalContentAlignment="Left" />
-                    <TextBox Text="{Binding ArbitraryArguments}" Width="380" TextAlignment="Left"
+                    <TextBox Text="{Binding ArbitraryArguments}" Width="700" TextAlignment="Left"
                              HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
 
@@ -314,9 +346,11 @@
 
                         <TextBox.Style>
                             <Style TargetType="TextBox">
+                                <Setter Property="HorizontalContentAlignment" Value="Left" />
                                 <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="FontSize" Value="12" />
-                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+                                <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource TextBackgroundColorBrush}" />
                                 <Style.Triggers>
                                     <Trigger Property="Text" Value="">
                                         <Setter Property="Background" Value="{StaticResource Watermark}" />
@@ -335,6 +369,7 @@
             </StackPanel>
         </GroupBox>
 
-        <Button Content="Launch" Margin="10" Padding="10" Grid.Row="1" Grid.Column="2" Click="Launch" />
+        <Button Style="{DynamicResource ButtonStyle}" Content="Launch" Margin="10" Padding="10" Grid.Row="1"
+                Grid.Column="2" Click="Launch" />
     </Grid>
 </Window>
