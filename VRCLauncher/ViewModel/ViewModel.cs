@@ -393,7 +393,7 @@ public class ViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
 
     [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    private void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
