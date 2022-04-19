@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows;
 using Microsoft.Win32;
 
@@ -19,8 +23,10 @@ public class Config
     public bool WatchAvatars { get; set; }
     public bool Fullscreen { get; set; }
     public int Width { get; set; }
+
     public int Height { get; set; }
-    public int Monitor { get; set; }
+
+    // public int Monitor { get; set; }
     public bool UdonDebugLogging { get; set; }
     public bool DebugGUI { get; set; }
     public bool SDKLogLevels { get; set; }
@@ -31,29 +37,43 @@ public class Config
     public bool DisableShoulderTracking { get; set; }
     public string LaunchInstance { get; set; }
     public string ArbitraryArguments { get; set; }
+    public ObservableCollection<CompanionApp> CompanionApps { get; set; }
+    public bool LaunchCompanionApps { get; set; }
+
+    [JsonIgnore] public const string UserFolderPath = @"%AppData%\..\LocalLow\VRCLauncher\";
+    [JsonIgnore] public static string ExpandedUserFolderPath = Environment.ExpandEnvironmentVariables(UserFolderPath);
+    [JsonIgnore] public const string ConfigName = "config.json";
 
     public Config()
     {
         NoVR = false;
         FPS = 90;
-        LegacyFBTCalibrate = false;
         Profile = 0;
+
         WatchWorlds = false;
         WatchAvatars = false;
+
         Fullscreen = true;
         Width = 0;
         Height = 0;
-        Monitor = 0;
+        // Monitor = 0;
+
         UdonDebugLogging = false;
         DebugGUI = false;
         SDKLogLevels = false;
         VerboseLogging = false;
-        MidiDevice = "";
+
+        LegacyFBTCalibrate = false;
         CustomArmRatio = "0.4537";
         DisableShoulderTracking = false;
+
+        MidiDevice = "";
         OSCPorts = "";
         LaunchInstance = "";
         ArbitraryArguments = "";
+
+        CompanionApps = new();
+        LaunchCompanionApps = true;
     }
 
     // ReSharper disable once IdentifierTypo
@@ -74,30 +94,28 @@ public class Config
 
     public void Save()
     {
-        string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-                             "\\3\\VRCLauncher";
-        if (!Directory.Exists(appDataPath)) Directory.CreateDirectory(appDataPath);
+        if (!Directory.Exists(ExpandedUserFolderPath)) Directory.CreateDirectory(ExpandedUserFolderPath);
 
         string json = JsonSerializer.Serialize(this);
-        File.WriteAllText(appDataPath + "\\config.json", json);
+        File.WriteAllText(ExpandedUserFolderPath + ConfigName, json);
     }
 
     public static Config Load()
     {
         Config config = new();
-        string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-                             "\\3\\VRCLauncher";
-        if (File.Exists(appDataPath + "\\config.json"))
+
+        if (File.Exists(ExpandedUserFolderPath + ConfigName))
         {
-            string json = File.ReadAllText(appDataPath + "\\config.json");
+            string json = File.ReadAllText(ExpandedUserFolderPath + ConfigName);
             try
             {
                 config = JsonSerializer.Deserialize<Config>(json)!;
                 config.LaunchInstance = "";
             }
-            catch (Exception e)
+            catch (Exception e) // JsonException
             {
-                MessageBox.Show("Error loading config.json: \n" + e.Message + "\n this might be due to a update");
+                MessageBox.Show($"Error loading {ConfigName}: \n" + e.Message + "\n this might be due to a update",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 config = new();
             }
         }
@@ -144,16 +162,16 @@ public class Config
             args.Add(Height.ToString());
         }
 
-        args.Add("-monitor");
-        args.Add(Monitor.ToString());
+        // args.Add("-monitor");
+        // args.Add(Monitor.ToString());
 
         if (MidiDevice != "") args.Add("--midi=" + MidiDevice);
 
         if (OSCPorts != "") args.Add("--osc-ports=" + OSCPorts);
-        
-        if(CustomArmRatio != "") args.Add("--custom-arm-ratio=" + CustomArmRatio);
-        
-        if(DisableShoulderTracking) args.Add("--disable-shoulder-tracking");
+
+        if (CustomArmRatio != "") args.Add("--custom-arm-ratio=" + CustomArmRatio);
+
+        if (DisableShoulderTracking) args.Add("--disable-shoulder-tracking");
 
         if (LaunchInstance != "") args.Add(LaunchInstance);
 
@@ -163,5 +181,72 @@ public class Config
         }
 
         return args;
+    }
+
+    public void LaunchApps(List<string> args)
+    {
+        if (LaunchCompanionApps)
+        {
+            foreach (CompanionApp app in CompanionApps)
+            {
+                bool launch = true;
+
+                if (app.Enabled)
+                {
+                    if (app.Rules != "")
+                    {
+                        foreach (string rule in app.Rules.Split(";"))
+                        {
+                            if (rule.StartsWith("!"))
+                            {
+                                if (args.Contains(rule.Substring(1)))
+                                {
+                                    launch = false;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                if (!args.Contains(rule))
+                                {
+                                    launch = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (Process process in Process.GetProcesses())
+                    {
+                        if (process.ProcessName.ToLower() == app.Name.ToLower())
+                        {
+                            launch = false;
+                            break;
+                        }
+                    }
+
+                    if (launch)
+                    {
+                        Process process = new();
+                        if (app.Path.EndsWith(".exe"))
+                        {
+                            process.StartInfo.FileName = app.Path;
+                            process.StartInfo.WorkingDirectory = Path.GetDirectoryName(app.Path);
+                            process.StartInfo.Arguments = app.Args;
+                            process.Start();
+                        }
+                        else if (app.Path.EndsWith(".py"))
+                        {
+                            process.StartInfo.FileName = "cmd.exe";
+                            process.StartInfo.Arguments = app.Path + " " + app.Args;
+                            process.StartInfo.RedirectStandardInput = true;
+                            process.Start();
+
+                            process.StandardInput.WriteLine("python " + app.Path + " " + app.Args);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

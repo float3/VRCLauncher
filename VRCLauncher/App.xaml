@@ -72,7 +72,7 @@
             <Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}" />
             <Setter Property="Background" Value="{DynamicResource WindowBackgroundColorBrush}" />
             <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
-            <Setter Property="SizeToContent" Value="WidthAndHeight" />
+            <!-- <Setter Property="SizeToContent" Value="WidthAndHeight" /> -->
             <Setter Property="UseLayoutRounding" Value="True" />
             <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
             <Setter Property="Template">
