@@ -240,7 +240,7 @@ public class ViewModel : INotifyPropertyChanged
             {
                 _sdkLogLevels = value;
                 Config.SDKLogLevels = value;
-                OnPropertyChanged(nameof(VerboseLogging));
+                OnPropertyChanged(nameof(SDKLogLevels));
             }
         }
     }
