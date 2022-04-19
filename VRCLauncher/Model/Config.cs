@@ -216,13 +216,34 @@ public class Config
                         }
                     }
 
+                    foreach (Process process in Process.GetProcesses())
+                    {
+                        if (process.ProcessName.ToLower() == app.Name.ToLower())
+                        {
+                            launch = false;
+                            break;
+                        }
+                    }
+
                     if (launch)
                     {
                         Process process = new();
-                        process.StartInfo.FileName = app.Path;
-                        process.StartInfo.WorkingDirectory = Path.GetDirectoryName(app.Path);
-                        process.StartInfo.Arguments = app.Args;
-                        process.Start();
+                        if (app.Path.EndsWith(".exe"))
+                        {
+                            process.StartInfo.FileName = app.Path;
+                            process.StartInfo.WorkingDirectory = Path.GetDirectoryName(app.Path);
+                            process.StartInfo.Arguments = app.Args;
+                            process.Start();
+                        }
+                        else if (app.Path.EndsWith(".py"))
+                        {
+                            process.StartInfo.FileName = "cmd.exe";
+                            process.StartInfo.Arguments = app.Path + " " + app.Args;
+                            process.StartInfo.RedirectStandardInput = true;
+                            process.Start();
+
+                            process.StandardInput.WriteLine("python " + app.Path + " " + app.Args);
+                        }
                     }
                 }
             }
