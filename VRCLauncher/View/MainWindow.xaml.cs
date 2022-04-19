@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -46,9 +47,11 @@ public partial class MainWindow
         Process process = new Process();
         process.StartInfo.FileName = Config.FindVRCexePath() + "\\VRChat.exe";
         process.StartInfo.WorkingDirectory = Config.FindVRCexePath();
-        string arguments = string.Join(" ", _viewModel.Config.GetArgs());
+        List<string> args = _viewModel.Config.GetArgs();
+        string arguments = string.Join(" ", args);
         process.StartInfo.Arguments = arguments;
         process.Start();
+        _viewModel.Config.LaunchApps(args);
     }
 
     private void ValidateFloatTextBox(object sender, TextCompositionEventArgs e)
@@ -88,5 +91,22 @@ public partial class MainWindow
     private void OnRestoreWindow(object target, ExecutedRoutedEventArgs e)
     {
         SystemCommands.RestoreWindow(this);
+    }
+
+    private void Remove(object sender, RoutedEventArgs e)
+    {
+        // if nothing is selected remove last element in list            
+        int index = CompanionApps.SelectedIndex == -1
+            ? CompanionApps.Items.Count - 1
+            : CompanionApps.SelectedIndex;
+        _viewModel.CompanionApps.RemoveAt(index);
+
+        // set selection back to where it was before
+        CompanionApps.SelectedIndex = index;
+    }
+
+    private void Add(object sender, RoutedEventArgs e)
+    {
+        _viewModel.CompanionApps.Add(new());
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using VRCLauncher.Annotations;
 using VRCLauncher.Model;
 
@@ -22,7 +22,7 @@ public class ViewModel : INotifyPropertyChanged
         Fullscreen = Config.Fullscreen;
         Width = Config.Width;
         Height = Config.Height;
-        Monitor = Config.Monitor;
+        // Monitor = Config.Monitor;
 
         UdonDebugLogging = Config.UdonDebugLogging;
         DebugGUI = Config.DebugGUI;
@@ -37,6 +37,9 @@ public class ViewModel : INotifyPropertyChanged
         OSCPorts = Config.OSCPorts;
         LaunchInstance = Config.LaunchInstance;
         ArbitraryArguments = Config.ArbitraryArguments;
+        
+        LaunchCompanionApps = Config.LaunchCompanionApps;
+        CompanionApps = Config.CompanionApps;
     }
 
     #region Main
@@ -177,8 +180,8 @@ public class ViewModel : INotifyPropertyChanged
         }
     }
 
-    private int _monitor;
-
+    /*private int _monitor;
+    
     public int Monitor
     {
         get => Config.Monitor;
@@ -191,7 +194,7 @@ public class ViewModel : INotifyPropertyChanged
                 OnPropertyChanged(nameof(Monitor));
             }
         }
-    }
+    }*/
 
     #endregion
 
@@ -388,6 +391,38 @@ public class ViewModel : INotifyPropertyChanged
         }
     }
 
+    private ObservableCollection<CompanionApp> _companionApps;
+
+    public ObservableCollection<CompanionApp> CompanionApps
+    {
+        get => Config.CompanionApps;
+        set
+        {
+            if (_companionApps != value)
+            {
+                _companionApps = value;
+                Config.CompanionApps = value;
+                OnPropertyChanged(nameof(CompanionApps));
+            }
+        }
+    }
+    
+    private bool _launchCompanionApps;
+
+    public bool LaunchCompanionApps
+    {
+        get => Config.LaunchCompanionApps;
+        set
+        {
+            if (_launchCompanionApps != value)
+            {
+                _launchCompanionApps = value;
+                Config.LaunchCompanionApps = value;
+                OnPropertyChanged(nameof(LaunchCompanionApps));
+            }
+        }
+    }
+    
     #endregion
 
     public event PropertyChangedEventHandler PropertyChanged;
