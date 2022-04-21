@@ -22,7 +22,7 @@ public class ViewModel : INotifyPropertyChanged
         Fullscreen = Config.Fullscreen;
         Width = Config.Width;
         Height = Config.Height;
-        // Monitor = Config.Monitor;
+        Monitor = Config.Monitor;
 
         UdonDebugLogging = Config.UdonDebugLogging;
         DebugGUI = Config.DebugGUI;
@@ -32,12 +32,13 @@ public class ViewModel : INotifyPropertyChanged
         LegacyFBTCalibrate = Config.LegacyFBTCalibrate;
         CustomArmRatio = Config.CustomArmRatio;
         DisableShoulderTracking = Config.DisableShoulderTracking;
+        CalibrationRange = Config.CalibrationRange;
 
         MidiDevice = Config.MidiDevice;
         OSCPorts = Config.OSCPorts;
         LaunchInstance = Config.LaunchInstance;
         ArbitraryArguments = Config.ArbitraryArguments;
-        
+
         LaunchCompanionApps = Config.LaunchCompanionApps;
         CompanionApps = Config.CompanionApps;
     }
@@ -128,11 +129,11 @@ public class ViewModel : INotifyPropertyChanged
         }
     }
 
-    private bool _fullscreen;
-
     #endregion
 
     #region Screen
+
+    private bool _fullscreen;
 
     public bool Fullscreen
     {
@@ -180,8 +181,8 @@ public class ViewModel : INotifyPropertyChanged
         }
     }
 
-    /*private int _monitor;
-    
+    private int _monitor;
+
     public int Monitor
     {
         get => Config.Monitor;
@@ -189,12 +190,13 @@ public class ViewModel : INotifyPropertyChanged
         {
             if (_monitor != value)
             {
+                if (value < 1) value = 1; // Monitor is specified by a 1-based index number 
                 _monitor = value;
                 Config.Monitor = value;
                 OnPropertyChanged(nameof(Monitor));
             }
         }
-    }*/
+    }
 
     #endregion
 
@@ -316,6 +318,22 @@ public class ViewModel : INotifyPropertyChanged
         }
     }
 
+    private string _calibrationRange;
+
+    public string CalibrationRange
+    {
+        get => Config.CalibrationRange;
+        set
+        {
+            if (_calibrationRange != value)
+            {
+                _calibrationRange = value;
+                Config.CalibrationRange = value;
+                OnPropertyChanged(nameof(CalibrationRange));
+            }
+        }
+    }
+
     #endregion
 
     #region MISC
@@ -406,7 +424,7 @@ public class ViewModel : INotifyPropertyChanged
             }
         }
     }
-    
+
     private bool _launchCompanionApps;
 
     public bool LaunchCompanionApps
@@ -422,7 +440,7 @@ public class ViewModel : INotifyPropertyChanged
             }
         }
     }
-    
+
     #endregion
 
     public event PropertyChangedEventHandler PropertyChanged;
