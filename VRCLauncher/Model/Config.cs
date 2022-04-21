@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows;
 using Microsoft.Win32;
-
-// ReSharper disable InconsistentNaming
 
 namespace VRCLauncher.Model;
 
@@ -17,26 +14,32 @@ public class Config
 {
     public bool NoVR { get; set; }
     public int FPS { get; set; }
-    public bool LegacyFBTCalibrate { get; set; }
     public int Profile { get; set; }
+
     public bool WatchWorlds { get; set; }
     public bool WatchAvatars { get; set; }
+
     public bool Fullscreen { get; set; }
     public int Width { get; set; }
 
     public int Height { get; set; }
+    public int Monitor { get; set; }
 
-    // public int Monitor { get; set; }
     public bool UdonDebugLogging { get; set; }
     public bool DebugGUI { get; set; }
     public bool SDKLogLevels { get; set; }
     public bool VerboseLogging { get; set; }
-    public string MidiDevice { get; set; }
-    public string OSCPorts { get; set; }
+
+    public bool LegacyFBTCalibrate { get; set; }
     public string CustomArmRatio { get; set; }
     public bool DisableShoulderTracking { get; set; }
+    public string CalibrationRange { get; set; }
+
+    public string MidiDevice { get; set; }
+    public string OSCPorts { get; set; }
     public string LaunchInstance { get; set; }
     public string ArbitraryArguments { get; set; }
+
     public ObservableCollection<CompanionApp> CompanionApps { get; set; }
     public bool LaunchCompanionApps { get; set; }
 
@@ -54,9 +57,9 @@ public class Config
         WatchAvatars = false;
 
         Fullscreen = true;
-        Width = 0;
-        Height = 0;
-        // Monitor = 0;
+        Width = 0; // (int) SystemParameters.PrimaryScreenWidth;
+        Height = 0; // (int) SystemParameters.PrimaryScreenHeight;
+        Monitor = 1;
 
         UdonDebugLogging = false;
         DebugGUI = false;
@@ -64,8 +67,9 @@ public class Config
         VerboseLogging = false;
 
         LegacyFBTCalibrate = false;
-        CustomArmRatio = "0.4537";
+        CustomArmRatio = "";
         DisableShoulderTracking = false;
+        CalibrationRange = "";
 
         MidiDevice = "";
         OSCPorts = "";
@@ -76,7 +80,6 @@ public class Config
         LaunchCompanionApps = true;
     }
 
-    // ReSharper disable once IdentifierTypo
     public static string FindVRCexePath()
     {
         try
@@ -131,21 +134,13 @@ public class Config
 
         args.Add("--fps=" + FPS);
 
-        if (LegacyFBTCalibrate) args.Add("--legacy-fbt-calibrate");
-
         args.Add("--profile=" + Profile);
+
 
         if (WatchWorlds) args.Add("--watch-worlds");
 
         if (WatchAvatars) args.Add("--watch-avatars");
 
-        if (UdonDebugLogging) args.Add("--enable-udon-debug-logging");
-
-        if (DebugGUI) args.Add("--enable-debug-gui");
-
-        if (SDKLogLevels) args.Add("--enable-sdk-log-levels");
-
-        if (VerboseLogging) args.Add("--enable-verbose-logging");
 
         args.Add("-screen-fullscreen");
         args.Add(Fullscreen ? "1" : "0");
@@ -162,16 +157,31 @@ public class Config
             args.Add(Height.ToString());
         }
 
-        // args.Add("-monitor");
-        // args.Add(Monitor.ToString());
+        args.Add("-monitor");
+        args.Add(Monitor.ToString());
+
+
+        if (UdonDebugLogging) args.Add("--enable-udon-debug-logging");
+
+        if (DebugGUI) args.Add("--enable-debug-gui");
+
+        if (SDKLogLevels) args.Add("--enable-sdk-log-levels");
+
+        if (VerboseLogging) args.Add("--enable-verbose-logging");
+
+
+        if (LegacyFBTCalibrate) args.Add("--legacy-fbt-calibrate");
+
+        if (CustomArmRatio != "") args.Add("--custom-arm-ratio=\"" + CustomArmRatio + "\"");
+
+        if (DisableShoulderTracking) args.Add("--disable-shoulder-tracking");
+
+        if (CalibrationRange != "") args.Add("--calibration-range=\"" + CalibrationRange + "\"");
+
 
         if (MidiDevice != "") args.Add("--midi=" + MidiDevice);
 
         if (OSCPorts != "") args.Add("--osc-ports=" + OSCPorts);
-
-        if (CustomArmRatio != "") args.Add("--custom-arm-ratio=" + CustomArmRatio);
-
-        if (DisableShoulderTracking) args.Add("--disable-shoulder-tracking");
 
         if (LaunchInstance != "") args.Add(LaunchInstance);
 
@@ -187,6 +197,8 @@ public class Config
     {
         if (LaunchCompanionApps)
         {
+            Process[] processes = Process.GetProcesses();
+
             foreach (CompanionApp app in CompanionApps)
             {
                 bool launch = true;
@@ -216,7 +228,7 @@ public class Config
                         }
                     }
 
-                    foreach (Process process in Process.GetProcesses())
+                    foreach (Process process in processes)
                     {
                         if (process.ProcessName.ToLower() == app.Name.ToLower())
                         {
@@ -238,7 +250,8 @@ public class Config
                         else if (app.Path.EndsWith(".py"))
                         {
                             process.StartInfo.FileName = "cmd.exe";
-                            process.StartInfo.Arguments = app.Path + " " + app.Args;
+                            process.StartInfo.WorkingDirectory = Path.GetDirectoryName(app.Path);
+                            process.StartInfo.Arguments = "";
                             process.StartInfo.RedirectStandardInput = true;
                             process.Start();
 
