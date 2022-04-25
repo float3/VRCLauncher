@@ -205,7 +205,7 @@ public class Config
 
                 if (app.Enabled)
                 {
-                    if (app.Rules != "")
+                    if (!String.IsNullOrEmpty(app.Rules))
                     {
                         foreach (string rule in app.Rules.Split(";"))
                         {
