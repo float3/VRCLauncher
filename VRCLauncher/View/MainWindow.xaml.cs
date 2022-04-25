@@ -44,6 +44,7 @@ public partial class MainWindow
 
     private void Launch(object sender, RoutedEventArgs e)
     {
+        _viewModel.Config.Save();
         Process process = new Process();
         process.StartInfo.FileName = Config.FindVRCexePath() + "\\VRChat.exe";
         process.StartInfo.WorkingDirectory = Config.FindVRCexePath();
