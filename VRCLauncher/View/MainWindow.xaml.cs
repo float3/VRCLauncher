@@ -24,14 +24,23 @@ public partial class MainWindow
         CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
-        
-        if (Environment.GetCommandLineArgs().Length > 0)
+
+        Process[] processList = Process.GetProcessesByName("VRCLauncher");
+
+        if (processList.Length > 1)
         {
-            foreach (string arg in Environment.GetCommandLineArgs())
-            {
-                if (arg.StartsWith("vrchat://")) _viewModel.LaunchInstance = arg;
-                if (arg == "--no-vr") _viewModel.NoVR = true;
-            }
+            MessageBoxResult result = MessageBox.Show("VRCLauncher is already running, start another instance?",
+                "VRCLauncher", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+                return;
+        }
+
+        string[] args = Environment.GetCommandLineArgs();
+
+        foreach (string arg in args)
+        {
+            if (arg.StartsWith("vrchat://")) _viewModel.LaunchInstance = arg;
+            if (arg == "--no-vr") _viewModel.NoVR = true;
         }
 
         Application.Current.Exit += OnApplicationExit;
