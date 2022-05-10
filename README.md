@@ -1,5 +1,5 @@
 # VRCLauncher
-![VRCLauncher_Ip4QekJZhk](https://user-images.githubusercontent.com/86748455/164448202-0e7d2a48-9a29-4d7e-9c65-d94ab90f261c.png)
+![VRCLauncher_Cnl7rw1dXt](https://user-images.githubusercontent.com/86748455/167714516-a8ba3909-b3f3-4e94-9a25-6018dee0dd7a.png)
 
 For In-Depth explanations for most of the commands go to
 
