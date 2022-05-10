@@ -34,6 +34,8 @@ public class Config
     public string CustomArmRatio { get; set; }
     public bool DisableShoulderTracking { get; set; }
     public string CalibrationRange { get; set; }
+    public bool FreezeTrackingOnDisconnect { get; set; }
+    public bool EnableIKDebugLogging { get; set; }
 
     public string MidiDevice { get; set; }
     public string OSCPorts { get; set; }
@@ -177,6 +179,10 @@ public class Config
         if (DisableShoulderTracking) args.Add("--disable-shoulder-tracking");
 
         if (CalibrationRange != "") args.Add("--calibration-range=\"" + CalibrationRange + "\"");
+
+        if (FreezeTrackingOnDisconnect) args.Add("--freeze-tracking-on-disconnect");
+
+        if (EnableIKDebugLogging) args.Add("--enable-ik-debug-logging");
 
 
         if (MidiDevice != "") args.Add("--midi=" + MidiDevice);
