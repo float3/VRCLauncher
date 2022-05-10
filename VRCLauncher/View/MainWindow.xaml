@@ -253,7 +253,7 @@
                                                     <TextBlock
                                                         FontStyle="Italic"
                                                         Foreground="#959595"
-                                                        Text="default: 0.3" />
+                                                        Text="default: 0.6, previous beta: 0.3" />
                                                 </VisualBrush.Visual>
                                             </VisualBrush>
                                         </TextBox.Resources>
@@ -284,7 +284,18 @@
 
                                     </TextBox>
                                 </StackPanel>
-
+                                
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="--enable-ik-debug-logging" Width="180"
+                                           HorizontalContentAlignment="Left" />
+                                    <CheckBox IsChecked="{Binding EnableIKDebugLogging}" />
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="--freeze-tracking-on-disconnect" Width="180"
+                                           HorizontalContentAlignment="Left" />
+                                    <CheckBox IsChecked="{Binding EnableIKDebugLogging}" />
+                                </StackPanel>
                             </StackPanel>
                         </GroupBox>
                     </StackPanel>
@@ -471,7 +482,7 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Header="Main" Margin="10" Padding="10" Grid.Row="1" Grid.Column="2">
+                <GroupBox Header="Launch" Margin="10" Padding="10" Grid.Row="1" Grid.Column="2">
                     <StackPanel>
                         <Button Style="{DynamicResource ButtonStyle}" Content="Launch" Margin="10" Padding="10"
                                 Click="Launch" />

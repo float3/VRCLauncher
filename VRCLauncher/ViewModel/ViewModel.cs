@@ -33,6 +33,8 @@ public class ViewModel : INotifyPropertyChanged
         CustomArmRatio = Config.CustomArmRatio;
         DisableShoulderTracking = Config.DisableShoulderTracking;
         CalibrationRange = Config.CalibrationRange;
+        FreezeTrackingOnDisconnect = Config.FreezeTrackingOnDisconnect;
+        EnableIKDebugLogging = Config.EnableIKDebugLogging;
 
         MidiDevice = Config.MidiDevice;
         OSCPorts = Config.OSCPorts;
@@ -330,6 +332,38 @@ public class ViewModel : INotifyPropertyChanged
                 _calibrationRange = value;
                 Config.CalibrationRange = value;
                 OnPropertyChanged(nameof(CalibrationRange));
+            }
+        }
+    }
+
+    private bool _freezeTrackingOnDisconnect;
+
+    public bool FreezeTrackingOnDisconnect
+    {
+        get => Config.FreezeTrackingOnDisconnect;
+        set
+        {
+            if (_freezeTrackingOnDisconnect != value)
+            {
+                _freezeTrackingOnDisconnect = value;
+                Config.FreezeTrackingOnDisconnect = value;
+                OnPropertyChanged(nameof(FreezeTrackingOnDisconnect));
+            }
+        }
+    }
+
+    private bool _enableIKDebugLogging;
+
+    public bool EnableIKDebugLogging
+    {
+        get => Config.EnableIKDebugLogging;
+        set
+        {
+            if (_enableIKDebugLogging != value)
+            {
+                _enableIKDebugLogging = value;
+                Config.EnableIKDebugLogging = value;
+                OnPropertyChanged(nameof(EnableIKDebugLogging));
             }
         }
     }
