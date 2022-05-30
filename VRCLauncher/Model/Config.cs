@@ -39,7 +39,7 @@ public class Config
 
     public string MidiDevice { get; set; }
     public string OSCPorts { get; set; }
-    public string LaunchInstance { get; set; }
+    [JsonIgnore] public string LaunchInstance { get; set; }
     public string ArbitraryArguments { get; set; }
 
     public ObservableCollection<CompanionApp> CompanionApps { get; set; }
@@ -67,11 +67,13 @@ public class Config
         DebugGUI = false;
         SDKLogLevels = false;
         VerboseLogging = false;
+        EnableIKDebugLogging = false;
 
         LegacyFBTCalibrate = false;
         CustomArmRatio = "";
         DisableShoulderTracking = false;
         CalibrationRange = "";
+        FreezeTrackingOnDisconnect = false;
 
         MidiDevice = "";
         OSCPorts = "";
@@ -115,7 +117,6 @@ public class Config
             try
             {
                 config = JsonSerializer.Deserialize<Config>(json)!;
-                config.LaunchInstance = "";
             }
             catch (Exception e) // JsonException
             {
