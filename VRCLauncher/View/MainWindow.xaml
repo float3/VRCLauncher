@@ -169,6 +169,12 @@
                             <Label Content="--enable-verbose-logging" Width="175" />
                             <CheckBox IsChecked="{Binding VerboseLogging}" />
                         </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="--enable-ik-debug-logging" Width="175"
+                                   HorizontalContentAlignment="Left" />
+                            <CheckBox IsChecked="{Binding EnableIKDebugLogging}" />
+                        </StackPanel>
                     </StackPanel>
                 </GroupBox>
 
@@ -179,125 +185,117 @@
                             <CheckBox IsChecked="{Binding LegacyFBTCalibrate}" />
                         </StackPanel>
 
-                        <GroupBox Header="IK Beta">
-                            <StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="--custom-arm-ratio=" Width="120" HorizontalContentAlignment="Left" />
-                                    <TextBox Text="{Binding CustomArmRatio}" Width="200" TextAlignment="Left"
-                                             HorizontalContentAlignment="Center"
-                                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"
-                                             PreviewTextInput="ValidateFloatTextBox">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="--custom-arm-ratio=" Width="120" HorizontalContentAlignment="Left" />
+                                <TextBox Text="{Binding CustomArmRatio}" Width="200" TextAlignment="Left"
+                                         HorizontalContentAlignment="Center"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"
+                                         PreviewTextInput="ValidateFloatTextBox">
 
-                                        <TextBox.Resources>
-                                            <VisualBrush
-                                                x:Key="Watermark"
-                                                AlignmentX="Left"
-                                                Stretch="None"
-                                                TileMode="None">
-                                                <VisualBrush.Visual>
-                                                    <TextBlock
-                                                        FontStyle="Italic"
-                                                        Foreground="#959595"
-                                                        Text="default: 0.4537, previous beta: 0.415" />
-                                                </VisualBrush.Visual>
-                                            </VisualBrush>
-                                        </TextBox.Resources>
+                                    <TextBox.Resources>
+                                        <VisualBrush
+                                            x:Key="Watermark"
+                                            AlignmentX="Left"
+                                            Stretch="None"
+                                            TileMode="None">
+                                            <VisualBrush.Visual>
+                                                <TextBlock
+                                                    FontStyle="Italic"
+                                                    Foreground="#959595"
+                                                    Text="default: 0.4537, previous beta: 0.415" />
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </TextBox.Resources>
 
-                                        <TextBox.Style>
-                                            <Style TargetType="TextBox">
-                                                <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                                <Setter Property="VerticalAlignment" Value="Center" />
-                                                <Setter Property="Foreground"
-                                                        Value="{StaticResource ForegroundColorBrush}" />
-                                                <Setter Property="Background"
-                                                        Value="{StaticResource TextBackgroundColorBrush}" />
-                                                <Setter Property="BorderBrush"
-                                                        Value="{StaticResource TextBackgroundColorBrush}" />
-                                                <Style.Triggers>
-                                                    <Trigger Property="Text" Value="">
-                                                        <Setter Property="Background"
-                                                                Value="{StaticResource Watermark}" />
-                                                    </Trigger>
+                                    <TextBox.Style>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                            <Setter Property="Foreground"
+                                                    Value="{StaticResource ForegroundColorBrush}" />
+                                            <Setter Property="Background"
+                                                    Value="{StaticResource TextBackgroundColorBrush}" />
+                                            <Setter Property="BorderBrush"
+                                                    Value="{StaticResource TextBackgroundColorBrush}" />
+                                            <Style.Triggers>
+                                                <Trigger Property="Text" Value="">
+                                                    <Setter Property="Background"
+                                                            Value="{StaticResource Watermark}" />
+                                                </Trigger>
 
-                                                    <Trigger Property="Text" Value="{x:Null}">
-                                                        <Setter Property="Background"
-                                                                Value="{StaticResource Watermark}" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBox.Style>
+                                                <Trigger Property="Text" Value="{x:Null}">
+                                                    <Setter Property="Background"
+                                                            Value="{StaticResource Watermark}" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
 
-                                    </TextBox>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="--disable-shoulder-tracking" Width="180"
-                                           HorizontalContentAlignment="Left" />
-                                    <CheckBox IsChecked="{Binding DisableShoulderTracking}" />
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="--calibration-range=" Width="120" HorizontalContentAlignment="Left" />
-                                    <TextBox Text="{Binding CalibrationRange}" Width="200" TextAlignment="Left"
-                                             HorizontalContentAlignment="Center"
-                                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"
-                                             PreviewTextInput="ValidateFloatTextBox">
-
-                                        <TextBox.Resources>
-                                            <VisualBrush
-                                                x:Key="Watermark"
-                                                AlignmentX="Left"
-                                                Stretch="None"
-                                                TileMode="None">
-                                                <VisualBrush.Visual>
-                                                    <TextBlock
-                                                        FontStyle="Italic"
-                                                        Foreground="#959595"
-                                                        Text="default: 0.6, previous beta: 0.3" />
-                                                </VisualBrush.Visual>
-                                            </VisualBrush>
-                                        </TextBox.Resources>
-
-                                        <TextBox.Style>
-                                            <Style TargetType="TextBox">
-                                                <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                                <Setter Property="VerticalAlignment" Value="Center" />
-                                                <Setter Property="Foreground"
-                                                        Value="{StaticResource ForegroundColorBrush}" />
-                                                <Setter Property="Background"
-                                                        Value="{StaticResource TextBackgroundColorBrush}" />
-                                                <Setter Property="BorderBrush"
-                                                        Value="{StaticResource TextBackgroundColorBrush}" />
-                                                <Style.Triggers>
-                                                    <Trigger Property="Text" Value="">
-                                                        <Setter Property="Background"
-                                                                Value="{StaticResource Watermark}" />
-                                                    </Trigger>
-
-                                                    <Trigger Property="Text" Value="{x:Null}">
-                                                        <Setter Property="Background"
-                                                                Value="{StaticResource Watermark}" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBox.Style>
-
-                                    </TextBox>
-                                </StackPanel>
-                                
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="--enable-ik-debug-logging" Width="180"
-                                           HorizontalContentAlignment="Left" />
-                                    <CheckBox IsChecked="{Binding EnableIKDebugLogging}" />
-                                </StackPanel>
-                                
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="--freeze-tracking-on-disconnect" Width="180"
-                                           HorizontalContentAlignment="Left" />
-                                    <CheckBox IsChecked="{Binding EnableIKDebugLogging}" />
-                                </StackPanel>
+                                </TextBox>
                             </StackPanel>
-                        </GroupBox>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="--disable-shoulder-tracking" Width="180"
+                                       HorizontalContentAlignment="Left" />
+                                <CheckBox IsChecked="{Binding DisableShoulderTracking}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="--calibration-range=" Width="120" HorizontalContentAlignment="Left" />
+                                <TextBox Text="{Binding CalibrationRange}" Width="200" TextAlignment="Left"
+                                         HorizontalContentAlignment="Center"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"
+                                         PreviewTextInput="ValidateFloatTextBox">
+
+                                    <TextBox.Resources>
+                                        <VisualBrush
+                                            x:Key="Watermark"
+                                            AlignmentX="Left"
+                                            Stretch="None"
+                                            TileMode="None">
+                                            <VisualBrush.Visual>
+                                                <TextBlock
+                                                    FontStyle="Italic"
+                                                    Foreground="#959595"
+                                                    Text="default: 0.6, previous beta: 0.3" />
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </TextBox.Resources>
+
+                                    <TextBox.Style>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                            <Setter Property="Foreground"
+                                                    Value="{StaticResource ForegroundColorBrush}" />
+                                            <Setter Property="Background"
+                                                    Value="{StaticResource TextBackgroundColorBrush}" />
+                                            <Setter Property="BorderBrush"
+                                                    Value="{StaticResource TextBackgroundColorBrush}" />
+                                            <Style.Triggers>
+                                                <Trigger Property="Text" Value="">
+                                                    <Setter Property="Background"
+                                                            Value="{StaticResource Watermark}" />
+                                                </Trigger>
+
+                                                <Trigger Property="Text" Value="{x:Null}">
+                                                    <Setter Property="Background"
+                                                            Value="{StaticResource Watermark}" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="--freeze-tracking-on-disconnect" Width="180"
+                                       HorizontalContentAlignment="Left" />
+                                <CheckBox IsChecked="{Binding FreezeTrackingOnDisconnect}" />
+                            </StackPanel>
+                        </StackPanel>
                     </StackPanel>
                 </GroupBox>
 

@@ -268,6 +268,22 @@ public class ViewModel : INotifyPropertyChanged
         }
     }
 
+    private bool _enableIKDebugLogging;
+
+    public bool EnableIKDebugLogging
+    {
+        get => Config.EnableIKDebugLogging;
+        set
+        {
+            if (_enableIKDebugLogging != value)
+            {
+                _enableIKDebugLogging = value;
+                Config.EnableIKDebugLogging = value;
+                OnPropertyChanged(nameof(EnableIKDebugLogging));
+            }
+        }
+    }
+
     #endregion
 
     #region IK
@@ -348,22 +364,6 @@ public class ViewModel : INotifyPropertyChanged
                 _freezeTrackingOnDisconnect = value;
                 Config.FreezeTrackingOnDisconnect = value;
                 OnPropertyChanged(nameof(FreezeTrackingOnDisconnect));
-            }
-        }
-    }
-
-    private bool _enableIKDebugLogging;
-
-    public bool EnableIKDebugLogging
-    {
-        get => Config.EnableIKDebugLogging;
-        set
-        {
-            if (_enableIKDebugLogging != value)
-            {
-                _enableIKDebugLogging = value;
-                Config.EnableIKDebugLogging = value;
-                OnPropertyChanged(nameof(EnableIKDebugLogging));
             }
         }
     }
