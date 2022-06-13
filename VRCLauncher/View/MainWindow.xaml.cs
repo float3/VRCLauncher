@@ -33,6 +33,8 @@ public partial class MainWindow
                 "VRCLauncher", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
                 return;
+            if(result == MessageBoxResult.No)
+                Environment.Exit(0);
         }
 
         string[] args = Environment.GetCommandLineArgs();

@@ -94,7 +94,8 @@ public class Config
         }
         catch
         {
-            MessageBox.Show("Error - Registry entry not present or null" + "\n VRChat not installed through steam");
+            MessageBox.Show("Error - Registry entry not present or null" + "\n VRChat not installed through steam",
+                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             throw new Exception("VRChat not installed through steam");
         }
     }
