@@ -169,7 +169,7 @@
                             <Label Content="--enable-verbose-logging" Width="175" />
                             <CheckBox IsChecked="{Binding VerboseLogging}" />
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Horizontal">
                             <Label Content="--enable-ik-debug-logging" Width="175"
                                    HorizontalContentAlignment="Left" />
@@ -482,9 +482,22 @@
 
                 <GroupBox Header="Launch" Margin="10" Padding="10" Grid.Row="1" Grid.Column="2">
                     <StackPanel>
-                        <Button Style="{DynamicResource ButtonStyle}" Content="Launch" Margin="10" Padding="10"
-                                Click="Launch" />
 
+                        <StackPanel>
+                            <Button Style="{DynamicResource ButtonStyle}" Content="Launch" Margin="10" Padding="10"
+                                    Click="Launch" />
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="RememberLaunchInstance" Width="180"
+                                   HorizontalContentAlignment="Left" />
+                            <CheckBox IsChecked="{Binding RememberLaunchInstance}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="CloseOnLaunch" Width="180"
+                                   HorizontalContentAlignment="Left" />
+                            <CheckBox IsChecked="{Binding CloseOnLaunch}" />
+                        </StackPanel>
                     </StackPanel>
                 </GroupBox>
             </Grid>
