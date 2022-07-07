@@ -43,6 +43,9 @@ public class ViewModel : INotifyPropertyChanged
 
         LaunchCompanionApps = Config.LaunchCompanionApps;
         CompanionApps = Config.CompanionApps;
+        
+        RememberLaunchInstance = Config.RememberLaunchInstance;
+        CloseOnLaunch = Config.CloseOnLaunch;
     }
 
     #region Main
@@ -471,6 +474,38 @@ public class ViewModel : INotifyPropertyChanged
                 _launchCompanionApps = value;
                 Config.LaunchCompanionApps = value;
                 OnPropertyChanged(nameof(LaunchCompanionApps));
+            }
+        }
+    }
+
+    private bool _closeOnLaunch;
+
+    public bool CloseOnLaunch
+    {
+        get => Config.CloseOnLaunch;
+        set
+        {
+            if (_closeOnLaunch != value)
+            {
+                _closeOnLaunch = value;
+                Config.CloseOnLaunch = value;
+                OnPropertyChanged(nameof(CloseOnLaunch));
+            }
+        }
+    }
+
+    private bool _rememberLaunchInstance;
+
+    public bool RememberLaunchInstance
+    {
+        get => Config.RememberLaunchInstance;
+        set
+        {
+            if (_rememberLaunchInstance != value)
+            {
+                _rememberLaunchInstance = value;
+                Config.RememberLaunchInstance = value;
+                OnPropertyChanged(nameof(RememberLaunchInstance));
             }
         }
     }

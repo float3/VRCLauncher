@@ -39,8 +39,11 @@ public class Config
 
     public string MidiDevice { get; set; }
     public string OSCPorts { get; set; }
-    [JsonIgnore] public string LaunchInstance { get; set; }
+    public string LaunchInstance { get; set; }
     public string ArbitraryArguments { get; set; }
+
+    public bool RememberLaunchInstance { get; set; }
+    public bool CloseOnLaunch { get; set; }
 
     public ObservableCollection<CompanionApp> CompanionApps { get; set; }
     public bool LaunchCompanionApps { get; set; }
@@ -82,6 +85,9 @@ public class Config
 
         CompanionApps = new();
         LaunchCompanionApps = true;
+
+        RememberLaunchInstance = false;
+        CloseOnLaunch = false;
     }
 
     public static string FindVRCexePath()
@@ -94,7 +100,8 @@ public class Config
         }
         catch
         {
-            MessageBox.Show("Error - Registry entry not present or null" + "\n VRChat not installed through steam");
+            MessageBox.Show("Error - Registry entry not present or null" + "\n VRChat not installed through steam",
+                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             throw new Exception("VRChat not installed through steam");
         }
     }
@@ -117,6 +124,7 @@ public class Config
             try
             {
                 config = JsonSerializer.Deserialize<Config>(json)!;
+                if (!config.RememberLaunchInstance) config.LaunchInstance = "";
             }
             catch (Exception e) // JsonException
             {

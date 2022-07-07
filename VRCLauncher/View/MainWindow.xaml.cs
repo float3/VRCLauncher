@@ -21,9 +21,12 @@ public partial class MainWindow
         DataContext = _viewModel;
 
         CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
-        CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
-        CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
-        CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
+        CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow,
+            OnCanResizeWindow));
+        CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow,
+            OnCanMinimizeWindow));
+        CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow,
+            OnCanResizeWindow));
 
         Process[] processList = Process.GetProcessesByName("VRCLauncher");
 
@@ -33,6 +36,8 @@ public partial class MainWindow
                 "VRCLauncher", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
                 return;
+            if (result == MessageBoxResult.No)
+                Environment.Exit(0);
         }
 
         string[] args = Environment.GetCommandLineArgs();
@@ -62,6 +67,8 @@ public partial class MainWindow
         process.StartInfo.Arguments = arguments;
         process.Start();
         _viewModel.Config.LaunchApps(args);
+
+        if (_viewModel.Config.CloseOnLaunch) Environment.Exit(0);
     }
 
     private void ValidateFloatTextBox(object sender, TextCompositionEventArgs e)
