@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -60,8 +60,8 @@ public partial class MainWindow
     {
         _viewModel.Config.Save();
         Process process = new Process();
-        process.StartInfo.FileName = Config.FindVRCexePath() + "\\launch.exe";
-        process.StartInfo.WorkingDirectory = Config.FindVRCexePath();
+        process.StartInfo.FileName = _viewModel.Config.FindVRCexePath();
+        process.StartInfo.WorkingDirectory = Config.FindVRCPath();
         List<string> args = _viewModel.Config.GetArgs();
         string arguments = string.Join(" ", args);
         process.StartInfo.Arguments = arguments;

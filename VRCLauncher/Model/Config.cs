@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Web;
 using System.Windows;
 using Microsoft.Win32;
 
@@ -40,6 +41,7 @@ public class Config
     public string MidiDevice { get; set; }
     public string OSCPorts { get; set; }
     public string LaunchInstance { get; set; }
+    public string LocalTestVRCWPath { get; set; }
     public string ArbitraryArguments { get; set; }
 
     public bool RememberLaunchInstance { get; set; }
@@ -81,6 +83,7 @@ public class Config
         MidiDevice = "";
         OSCPorts = "";
         LaunchInstance = "";
+        LocalTestVRCWPath = "";
         ArbitraryArguments = "";
 
         CompanionApps = new();
@@ -90,7 +93,7 @@ public class Config
         CloseOnLaunch = false;
     }
 
-    public static string FindVRCexePath()
+    public static string FindVRCPath()
     {
         try
         {
@@ -104,6 +107,11 @@ public class Config
                 "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             throw new Exception("VRChat not installed through steam");
         }
+    }
+
+    public string FindVRCexePath()
+    {
+        return FindVRCPath() + LocalTestVRCWPath == "" ? "\\launch.exe" : "\\VRChat.exe";
     }
 
     public void Save()
@@ -199,6 +207,20 @@ public class Config
         if (OSCPorts != "") args.Add("--osc-ports=" + OSCPorts);
 
         if (LaunchInstance != "") args.Add(LaunchInstance);
+
+        if (LocalTestVRCWPath != "")
+        {
+            Random rand = new();
+            string randString = "";
+            for (int i = 0; i < 10; i++)
+            {
+                randString += rand.Next(0, 10);
+            }
+
+            Debug.Assert(randString.Length == 10);
+            args.Add("--url=create?roomId=" + randString + "&hidden=true&name=BuildAndRun&url=file:///" +
+                     HttpUtility.UrlEncode(LocalTestVRCWPath));
+        }
 
         if (ArbitraryArguments != "")
         {

@@ -39,14 +39,16 @@ public class ViewModel : INotifyPropertyChanged
         MidiDevice = Config.MidiDevice;
         OSCPorts = Config.OSCPorts;
         LaunchInstance = Config.LaunchInstance;
+        LocalTestVRCWPath = Config.LocalTestVRCWPath;
         ArbitraryArguments = Config.ArbitraryArguments;
 
         LaunchCompanionApps = Config.LaunchCompanionApps;
         CompanionApps = Config.CompanionApps;
-        
+
         RememberLaunchInstance = Config.RememberLaunchInstance;
         CloseOnLaunch = Config.CloseOnLaunch;
     }
+
 
     #region Main
 
@@ -426,6 +428,22 @@ public class ViewModel : INotifyPropertyChanged
                 _launchInstance = instance;
                 Config.LaunchInstance = instance;
                 OnPropertyChanged(nameof(LaunchInstance));
+            }
+        }
+    }
+
+    private string _localTestVRCWPath;
+
+    public string LocalTestVRCWPath
+    {
+        get => Config.LocalTestVRCWPath;
+        set
+        {
+            if (_localTestVRCWPath != value)
+            {
+                _localTestVRCWPath = value;
+                Config.LocalTestVRCWPath = value;
+                OnPropertyChanged(nameof(LocalTestVRCWPath));
             }
         }
     }

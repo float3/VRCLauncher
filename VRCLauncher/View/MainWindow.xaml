@@ -302,7 +302,7 @@
                 <GroupBox Header="Misc" Margin="10" Padding="10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="--midi=" Width="120" HorizontalContentAlignment="Left" />
+                            <Label Content="--midi=" Width="130" HorizontalContentAlignment="Left" />
                             <TextBox Text="{Binding MidiDevice}" Width="700" TextAlignment="Left"
                                      HorizontalContentAlignment="Center"
                                      HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
@@ -346,7 +346,7 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="--osc=" Width="120" HorizontalContentAlignment="Left" />
+                            <Label Content="--osc=" Width="130" HorizontalContentAlignment="Left" />
                             <TextBox Text="{Binding OSCPorts}" Width="700" TextAlignment="Left"
                                      HorizontalContentAlignment="Center"
                                      HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
@@ -390,7 +390,7 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Launch Instance" Width="120" HorizontalContentAlignment="Left" />
+                            <Label Content="Launch Instance" Width="130" HorizontalContentAlignment="Left" />
                             <TextBox Text="{Binding LaunchInstance}" Width="700" TextAlignment="Left"
                                      HorizontalContentAlignment="Center"
                                      HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
@@ -432,9 +432,52 @@
 
                             </TextBox>
                         </StackPanel>
-
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Additional Args" Width="120" HorizontalContentAlignment="Left" />
+                            <Label Content="Local Test VRCW Path" Width="130" HorizontalContentAlignment="Left" />
+                            <TextBox Text="{Binding LocalTestVRCWPath}" Width="700" TextAlignment="Left"
+                                     HorizontalContentAlignment="Center"
+                                     HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
+
+                                <TextBox.Resources>
+                                    <VisualBrush
+                                        x:Key="Watermark"
+                                        AlignmentX="Left"
+                                        Stretch="None"
+                                        TileMode="None">
+                                        <VisualBrush.Visual>
+                                            <TextBlock
+                                                FontStyle="Italic"
+                                                Foreground="#959595"
+                                                Text="Path to VRCW file to launch as 'local build and test'" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </TextBox.Resources>
+
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+                                        <Setter Property="Background" Value="{StaticResource TextBackgroundColorBrush}" />
+                                        <Setter Property="BorderBrush"
+                                                Value="{StaticResource TextBackgroundColorBrush}" />
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="">
+                                                <Setter Property="Background" Value="{StaticResource Watermark}" />
+                                            </Trigger>
+
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Background" Value="{StaticResource Watermark}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+
+                            </TextBox>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Additional Args" Width="130" HorizontalContentAlignment="Left" />
                             <TextBox Text="{Binding ArbitraryArguments}" Width="700" TextAlignment="Left"
                                      HorizontalContentAlignment="Center"
                                      HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
