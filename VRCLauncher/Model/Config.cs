@@ -111,7 +111,7 @@ public class Config
 
     public string FindVRCexePath()
     {
-        return FindVRCPath() + LocalTestVRCWPath == "" ? "\\launch.exe" : "\\VRChat.exe";
+        return FindVRCPath() + (LocalTestVRCWPath == "" ? "\\launch.exe" : "\\VRChat.exe");
     }
 
     public void Save()
