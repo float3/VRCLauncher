@@ -1,13 +1,13 @@
 # VRCLauncher
 ![VRCLauncher_Cnl7rw1dXt](https://user-images.githubusercontent.com/86748455/167714516-a8ba3909-b3f3-4e94-9a25-6018dee0dd7a.png)
 
-For In-Depth explanations for most of the flags go to
+for In-Depth explanations for most of the flags go to
 
 https://docs.vrchat.com/docs/launch-options
 
 https://docs.unity3d.com/2019.4/Documentation/Manual/PlayerCommandLineArguments.html
 
-Arguments that aren't covered by those links can be found below
+arguments that aren't covered by those links can be found below
 
 | argument                                                                                  | default value                | explanation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | source                                                                                                                               |
 |-------------------------------------------------------------------------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
