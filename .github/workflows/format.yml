@@ -1,0 +1,43 @@
+name: Format
+
+on:
+  pull_request:
+    paths:
+      - "**.nix"
+      - flake.lock
+      - .github/workflows/format.yml
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - "**.nix"
+      - flake.lock
+      - .github/workflows/format.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  alejandra:
+    name: Alejandra
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@75c75c31ebece974e48ebc36b4ad125bd97bd97b # v31
+        with:
+          extra_nix_config: |
+            accept-flake-config = false
+            experimental-features = nix-command flakes
+
+      # The flake's formatter, at the version flake.lock pins.
+      - name: Check Nix formatting
+        run: nix fmt -- --check .
